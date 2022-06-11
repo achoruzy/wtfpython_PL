@@ -1,45 +1,48 @@
-All kinds of patches are welcome. Feel free to even suggest some catchy and funny titles for the existing Examples. The goal is to make this collection as interesting to read as possible.
+Wszelkie propozycje poprawek są mile widziane. Możesz nawet zasugerować jakieś zabawne i wpadające w oko tytuły dla istniejących przykładów. Celem jest stworzenie możliwie najbardziej interesującej lektury.
 
-If you are interested in translating the project to another language (some people have done that in the past), please feel free to open up an issue, and let me know if you need any kind of help.
+Jeśli jesteś zainteresowany tłumaczeniem projektu na inny język (pewni ludzie robili to już wcześniej), otwórz issue i daj znać czy potrzebujesz jakiejś pomocy.
 
-If the changes you suggest are significant, filing an issue before submitting the actual patch will be appreciated. If you'd like to work on the issue (highly encouraged), you can mention that you're interested in working on it while creating the issue and get assigned to it.
+Jeśli zmiany, które zasugerowałeś, są rozległe, będziemy wdzięczni za opisanie ich w issue przed wysłaniem. Jeśli chcesz podjąć się pracy nad zgłoszonym przez siebie issue (a mocno do tego zachęcamy), napisz to w opisie podczas tworzenia, a zostaniesz do niego przypisany.
 
-If you're adding a new example, please do create an issue to discuss it before submitting a patch.
+Jeśli dodajesz nowy Przykład, otwórz issue aby go przedyskutować przed wysłaniem poprawek.
 
-You can use the following template for adding a new example:
+Aby dodać nowy Przykład, skorzystaj z poniższego szablonu:
 
 <pre>
-### ▶ Some fancy Title *
-The asterisk at the end of the title indicates the example was not present in the first release and has been recently added.
+### ▶ Jakiś fancy tytuł *
+Gwiazdka na końcu tytułu mówi, że Przykład nie był obecny w ostatnim releasie i został dodany niedawno.
 
 ```py
-# Setting up the code.
-# Preparation for the magic...
+# Wprowadzenie kodu.
+# Przygotowanie pod magię...
 ```
 
-**Output (Python version):**
+**Wynik (wersja Pythona):**
 ```py
->>> triggering_statement
-Probably unexpected output
+>>> wyrażenie_uruchamiające
+Prawdopodobnie nieoczekiwany wynik
 ```
-(Optional): One line describing the unexpected output.
+(Opcjonalnie): Jedna linia wyjaśniająca nieoczekiwany wynik.
 
-#### 💡 Explanation:
-* Brief explanation of what's happening and why is it happening.
+#### 💡 Omówienie Przykładu:
+* Krótkie omówienie co i dlaczego się wydarzyło.
   ```py
-  Setting up examples for clarification (if necessary)
+  Wprowadzenie przykładów wyjaśniających (jeśli niezbędne)
   ```
-  **Outupt:**
+  **Wynik:**
   ```py
-  >>> trigger # some example that makes it easy to unveil the magic
-  # some justified output
+  >>> uruchomienie # jakiegoś przykładu, który może w prosty sposób wytłumaczyć magie
+  # jakiś rezultat
   ```
 ```
 </pre>
 
 
-Few things that you can consider while writing an example, 
+Kilka spraw, które możesz uwzględnić podczas opisywania nowego Przykładu.
 
-- Try to be consistent with the namings and the values you use with the variables. For instance, most variable names in the project are along the lines of `some_string`, `some_list`, `some_dict`, etc. You'd see a lot of `x`s for single letter variable names, and `"wtf"` as values for strings. There's strictly enforced scheme in the project, but you can take a glance at other examples to get a gist.
-- Try to be as creative as possible to add that element of "surprise" in the setting up part of an example. Sometimes this may mean writing a snippet a sane programmer would never write.
-- Also, please don't forget to add your name to the [contributors list](/CONTRIBUTING.md).
+- Postaraj się być konsekwentny w nazywaniu zmiennych i nadawanych wartościach. Na przykład większość nazw zmiennych w
+projekcie jest nazywana w konwencji `some_string`, `some_list`, `some_dict`, itd. Zobaczysz wiele `x`ów jak jedno-literowe
+nazwy zmiennych i `"wtf"` jako wartości stringów. W projekcie wymuszamy ścisły schemat, który możesz zauważyć również w innych przykładach.
+- Postaraj się być jak najbardziej kreatywny i dodać jakiś efekt "zaskoczenia" wprowadzając swój przykład. Czasem może to
+oznaczać napisanie fragmentu kodu, którym rozsądny programista nie szczyciłby się na co dzień.
+- No i nie zapomnij dodać siebie do [contributors list](/CONTRIBUTING.md).
