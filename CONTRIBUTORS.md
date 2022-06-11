@@ -1,6 +1,6 @@
-Following are the wonderful people (in no specific order) who have contributed their examples to wtfpython.
+Poniżej znajdziesz wspaniałych ludzi (kolejność jest bez znaczenia), którzy rozbudowali wtfpython o swoje Przykłady.
 
-| Contributor | Github | Issues |
+| Kontrybutor | Github | Issues |
 |-------------|--------|--------|
 | Lucas-C | [Lucas-C](https://github.com/Lucas-C) | [#36](https://github.com/satwikkansal/wtfpython/issues/36) |
 | MittalAshok | [MittalAshok](https://github.com/MittalAshok) | [#23](https://github.com/satwikkansal/wtfpython/issues/23) |
@@ -23,6 +23,6 @@ Following are the wonderful people (in no specific order) who have contributed t
 | jab | [jab](https://github.com/jab) | [#77](https://github.com/satwikkansal/wtfpython/issues/77) |
 
 
-Thank you all for your time and making wtfpython more awesome! :smile:
+Dziękuję wszystkim za Wasz czas i sprawienie, że wtfpython jest jeszcze wspanialsze! :smile:
 
-PS: This list is updated after every major release, if I forgot to add your contribution here, please feel free to raise a Pull request.
+PS: Lista jest aktualizowana po każdym większym releasie. Jeśli zapomnę dodać tu Twoją kontrybucję, nie krępuj się wrzucić Pull request.
