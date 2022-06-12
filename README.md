@@ -7,19 +7,19 @@ Tłumaczenia: [Angielski English](https://github.com/satwikkansal/wtfpython) | [
 
 Inne tryby: [Interaktywny](https://colab.research.google.com/github/satwikkansal/wtfpython/blob/3.0/irrelevant/wtf.ipynb) | [CLI](https://pypi.python.org/pypi/wtfpython)
 
-Python, being a beautifully designed high-level and interpreter-based programming language, provides us with many features for the programmer's comfort. But sometimes, the outcomes of a Python snippet may not seem obvious at first sight.
+Python, będąc wspaniale zaprojektowanym, wysoko-poziomowym, interpretowanym językiem programowania, zapewnia nam wiele funkcji zwiększających wygodę programowania. Czasami jednak, wyniki pewnych fragmentów kodu mogą okazać się niejasne na pierwszy rzut oka.
 
-Here's a fun project attempting to explain what exactly is happening under the hood for some counter-intuitive snippets and lesser-known features in Python.
+wtfpython to zabawny projekt starający się wytłumaczyć co dokładnie dzieje się pod maską Pythona podczas używania pewnych nieintuicyjnych i mniej znanych funkcji.
 
-While some of the examples you see below may not be WTFs in the truest sense, but they'll reveal some of the interesting parts of Python that you might be unaware of. I find it a nice way to learn the internals of a programming language, and I believe that you'll find it interesting too!
+Podczas gdy niektóre z Przykładów, które znajdziesz poniżej, mogą nie być typowo WTF, to jednak pokazują pewne interesujące zachowania Pythona, których możesz nie znać. Uważam, że jest to dobry sposób na poznanie wnętrza języka programowania i wierzę, że Ciebie też to zainteresuje!
 
-If you're an experienced Python programmer, you can take it as a challenge to get most of them right in the first attempt. You may have already experienced some of them before, and I might be able to revive sweet old memories of yours! :sweat_smile:
+Jeśli jesteś zaawansowanym programistą Pythona, możesz wziąć za wyzwanie samodzielne rozwiązanie tych problemów. Może doświadczyłeś już pewnych z nich i przypomnisz sobie tamte piękne chwile! :sweat_smile:
 
-PS: If you're a returning reader, you can learn about the new modifications [here](https://github.com/satwikkansal/wtfpython/releases/).
+PS: Jeśli jesteś tu po raz kolejny, o nowościach i modyfikacjach dowiesz się [stąd](https://github.com/satwikkansal/wtfpython/releases/).
 
-So, here we go...
+No to lecimy...
 
-# Table of Contents
+# Spis treści
 
 <!-- Generated using "markdown-toc -i README.md --maxdepth 3"-->
 
