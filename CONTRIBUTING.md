@@ -9,7 +9,7 @@ Jeśli dodajesz nowy Przykład, otwórz issue aby go przedyskutować przed wysł
 Aby dodać nowy Przykład, skorzystaj z poniższego szablonu:
 
 <pre>
-### ▶ Jakiś fancy tytuł *
+### ▶ Jakiś fikuśny tytuł *
 Gwiazdka na końcu tytułu mówi, że Przykład nie był obecny w ostatnim releasie i został dodany niedawno.
 
 ```py

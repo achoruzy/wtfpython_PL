@@ -102,53 +102,53 @@ No to lecimy...
 
 <!-- tocstop -->
 
-# Structure of the Examples
+# Struktura Przykładu
 
-All the examples are structured like below:
+Wszystkie przykłady posiadają strukturę jak poniżej:
 
-> ### ▶ Some fancy Title
+> ### ▶ Jakiś fikuśny tytuł
 >
 > ```py
-> # Set up the code.
-> # Preparation for the magic...
+> # Wprowadzenie kodu.
+> # Przygotowanie pod magię...
 > ```
 >
-> **Output (Python version(s)):**
+> **Wynik (wersja lub wersje Pythona):**
 >
 > ```py
-> >>> triggering_statement
-> Some unexpected output
+> >>> wyrażenie_uruchamiające
+> Jakiś nieoczekiwany wynik
 > ```
-> (Optional): One line describing the unexpected output.
+> (Opcjonalnie): Jedna linia wyjaśniająca nieoczekiwany wynik.
 >
 >
-> #### 💡 Explanation:
+> #### 💡 Wyjaśnienie:
 >
-> * Brief explanation of what's happening and why is it happening.
+> * Krótkie omówienie co i dlaczego się wydarzyło.
 > ```py
-> # Set up code
-> # More examples for further clarification (if necessary)
+> # Wprowadzenie kodu.
+> # Wprowadzenie przykładów wyjaśniających (jeśli niezbędne)
 > ```
-> **Output (Python version(s)):**
+> **Wynik (wersja lub wersje Pythona):**
 >
 > ```py
-> >>> trigger # some example that makes it easy to unveil the magic
-> # some justified output
+> >>> uruchomienie # jakiegoś przykładu, który może w prosty sposób wytłumaczyć magie
+>  # jakiś rezultat
 > ```
 
-**Note:** All the examples are tested on Python 3.5.2 interactive interpreter, and they should work for all the Python versions unless explicitly specified before the output.
+**Uwaga:** Wszystkie przykłady zostały przetestowane w środowisku Python 3.5.2 interactive interpreter, i powinny działać we wszystkich wersjach Python 3, chyba że przed opisaniem wyniku stwierdzono inaczej.
 
-# Usage
+# Używanie
 
-A nice way to get the most out of these examples, in my opinion, is to read them chronologically, and for every example:
-- Carefully read the initial code for setting up the example. If you're an experienced Python programmer, you'll successfully anticipate what's going to happen next most of the time.
-- Read the output snippets and,
-  + Check if the outputs are the same as you'd expect.
-  + Make sure if you know the exact reason behind the output being the way it is.
-    - If the answer is no (which is perfectly okay), take a deep breath, and read the explanation (and if you still don't understand, shout out! and create an issue [here](https://github.com/satwikkansal/wtfPython)).
-    - If yes, give a gentle pat on your back, and you may skip to the next example.
+Dobrym sposobem na wyciągnięcie jak najwięcej z poniższych przykładów, w mojej opinii, jest czytanie ich chronologicznie i dla każdego przykładu:
+- Ostrożne przeczytanie kodu inicjującego przykład. Jeśli jesteś doświadczonym programistą Pythona, przez większość czasu z powodzeniem będziesz przewidywał, co się wydarzy.
+- Przeczytanie wyniku i:
+    + Porównanie czy wynik jest taki jak się tego spodziewałeś.
+    + Upewnienie się, że rozumiesz powód, dla którego wynik jest właśnie taki.
+        - Jeśli nie rozumiesz (co jest całkowicie w porządku), weź głęboki oddech i przeczytaj wyjaśnienie (a jeśli nadal nie rozumiesz, daj znać! stwórz issue [tutaj](https://github.com/satwikkansal/wtfPython)).
+        - Jeśli rozumiesz, poklep się po ramieniu i kontynuuj z następnym przykładem.
 
-PS: You can also read WTFPython at the command line using the [pypi package](https://pypi.python.org/pypi/wtfpython),
+PS: Możesz również czytać WTFPython z użyciem wiersza poleceń / terminala (tylko oryginalna wersja angielska) używając [paczkę pypi](https://pypi.python.org/pypi/wtfpython),
 ```sh
 $ pip install wtfpython -U
 $ wtfpython
