@@ -155,16 +155,16 @@ $ wtfpython
 ```
 ---
 
-# 👀 Examples
+# 👀 Przykłady
 
-## Section: Strain your brain!
+## Sekcja: Gimnastyka dla mózgu!
 
-### ▶ First things first! *
+### ▶ Pierwsze - najważniejsze! *
 
 <!-- Example ID: d3d73936-3cf1-4632-b5ab-817981338863 -->
 <!-- read-only -->
 
-For some reason, the Python 3.8's "Walrus" operator (`:=`) has become quite popular. Let's check it out,
+Z jakiegoś powodu udostępniony w Python 3.8 "Walrus" operator (`:=`) stał się całkiem popularny. Sprawdźmy go!
 
 1\.
 
@@ -181,7 +181,7 @@ File "<stdin>", line 1
       ^
 SyntaxError: invalid syntax
 
->>> (a := "wtf_walrus") # This works though
+>>> (a := "wtf_walrus") # A tutaj działa
 >>> a
 'wtf_walrus'
 ```
@@ -199,7 +199,7 @@ SyntaxError: invalid syntax
 >>> a
 6
 
->>> a, b = 6, 9 # Typcial unpacking
+>>> a, b = 6, 9 # Typowy unpacking
 >>> a, b
 (6, 9)
 >>> (a, b = 16, 19) # Oops
@@ -208,10 +208,10 @@ SyntaxError: invalid syntax
           ^
 SyntaxError: invalid syntax
 
->>> (a, b := 16, 19) # This prints out a weird 3-tuple
+>>> (a, b := 16, 19) # Tutaj printuje dziwny 3-wartościowy tuple
 (6, 16, 19)
 
->>> a # a is still unchanged?
+>>> a # a nadal bez zmian?
 6
 
 >>> b
@@ -220,33 +220,33 @@ SyntaxError: invalid syntax
 
 
 
-#### 💡 Explanation
+#### 💡 Wytłumaczenie
 
 **Quick walrus operator refresher**
 
-The Walrus operator (`:=`) was introduced in Python 3.8, it can be useful in situations where you'd want to assign values to variables within an expression.
+Walrus operator (`:=`) został wprowadzony w Python 3.8 i może być przydatny w sytuacjach gdy chcesz nadać wartość zmiennej wewnątrz wyrażenia.
 
 ```py
 def some_func():
-        # Assume some expensive computation here
+        # Załóżmy tutaj jakieś ciężkie obliczenia
         # time.sleep(1000)
         return 5
 
-# So instead of,
+# Więc zamiast
 if some_func():
-        print(some_func()) # Which is bad practice since computation is happening twice
+        print(some_func()) # Co nie jest dobrą praktyką bo obliczenia dzieją się dwa razy
 
-# or
+# lub zamiast
 a = some_func()
 if a:
     print(a)
 
-# Now you can concisely write
+# Możesz śmiało użyć
 if a := some_func():
         print(a)
 ```
 
-**Output (> 3.8):**
+**Wynik (> 3.8):**
 
 ```py
 5
@@ -254,15 +254,15 @@ if a := some_func():
 5
 ```
 
-This saved one line of code, and implicitly prevented invoking `some_func` twice.
+To pozwoliło zaoszczędzić linię kodu i zapobiegło niejawnemu użyciu `some_func` drugi raz.
 
-- Unparenthesized "assignment expression" (use of walrus operator), is restricted at the top level, hence the `SyntaxError` in the `a := "wtf_walrus"` statement of the first snippet. Parenthesizing it worked as expected and assigned `a`.  
+- Niezawarcie w nawiasach "wyrażenia przypisania" (użycia walrus operator) jest niedozwolone, stąd `SyntaxError` przy `a := "wtf_walrus"` w pierwszym fragmencie kodu. Wzięcie go w nawias zadziałało jak tego oczekiwaliśmy, przypisując wartość do zmiennej `a`.  
 
-- As usual, parenthesizing of an expression containing `=` operator is not allowed. Hence the syntax error in `(a, b = 6, 9)`. 
+- Typowo, wzięcie w nawias wyrażenia zawierającego `=` jest niedozwolone. Stąd syntax error przy `(a, b = 6, 9)`. 
 
-- The syntax of the Walrus operator is of the form `NAME: expr`, where `NAME` is a valid identifier, and `expr` is a valid expression. Hence, iterable packing and unpacking are not supported which means, 
+- Składnia Walrus operator ma formułę `NAZWA: wyrażenie`, gdzie `NAZWA` to poprawny identyfikator, a `wyrażenie` jest poprawnym wyrażeniem. Dlatego pakowanie i rozpakowywanie iterałów nie jest wspierane, co znaczy, że 
 
-  - `(a := 6, 9)` is equivalent to `((a := 6), 9)` and ultimately `(a, 9) ` (where `a`'s value is 6')
+  - `(a := 6, 9)` jest tożsame z `((a := 6), 9)` jak również z `(a, 9) ` (gdzie wartość `a` to 6')
 
     ```py
     >>> (a := 6, 9) == ((a := 6), 9)
@@ -270,11 +270,11 @@ This saved one line of code, and implicitly prevented invoking `some_func` twice
     >>> x = (a := 696, 9)
     >>> x
     (696, 9)
-    >>> x[0] is a # Both reference same memory location
+    >>> x[0] is a # Oba wskazują to samo miejsce w pamięci
     True
     ```
 
-  - Similarly, `(a, b := 16, 19)` is equivalent to `(a, (b := 16), 19)` which is nothing but a 3-tuple. 
+  - Podobnie `(a, b := 16, 19)` jest tożsame z `(a, (b := 16), 19)`, które jest niczym innym jak 3-wartościowym tuplem. 
 
 ---
 
