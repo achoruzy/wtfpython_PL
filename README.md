@@ -222,7 +222,7 @@ SyntaxError: invalid syntax
 
 #### 💡 Wytłumaczenie
 
-**Quick walrus operator refresher**
+**Szybkie przypomnienie o walrus operator**
 
 Walrus operator (`:=`) został wprowadzony w Python 3.8 i może być przydatny w sytuacjach gdy chcesz nadać wartość zmiennej wewnątrz wyrażenia.
 
@@ -278,7 +278,7 @@ To pozwoliło zaoszczędzić linię kodu i zapobiegło niejawnemu użyciu `some_
 
 ---
 
-### ▶ Strings can be tricky sometimes
+### ▶ Stringi bywają zdradliwe
 
 <!-- Example ID: 30f1d3fc-e267-4b30-84ef-4d9e7091ac1a --->
 1\.
@@ -287,7 +287,7 @@ To pozwoliło zaoszczędzić linię kodu i zapobiegło niejawnemu użyciu `some_
 >>> a = "some_string"
 >>> id(a)
 140420665652016
->>> id("some" + "_" + "string") # Notice that both the ids are same.
+>>> id("some" + "_" + "string") # Zauważ, że obydwa id są takie same.
 140420665652016
 ```
 
@@ -309,26 +309,26 @@ False
 
 ```py
 >>> a, b = "wtf!", "wtf!"
->>> a is b # All versions except 3.7.x
+>>> a is b # Wszystkie wersje Python oprócz 3.7.x
 True
 
 >>> a = "wtf!"; b = "wtf!"
->>> a is b # This will print True or False depending on where you're invoking it (python shell / ipython / as a script)
+>>> a is b # To zwróci True lub False zależnie od tego jak skrypt zostanie wywołany (python shell / ipython / jako skrypt)
 False
 ```
 
 ```py
-# This time in file some_file.py
+# Tym razen w jakimś pliku some_file.py
 a = "wtf!"
 b = "wtf!"
 print(a is b)
 
-# prints True when the module is invoked!
+# printuje True gdy ten moduł jest wywołany w innym module!
 ```
 
 4\.
 
-**Output (< Python3.7 )**
+**Wynik (< Python3.7 )**
 
 ```py
 >>> 'a' * 20 is 'aaaaaaaaaaaaaaaaaaaa'
@@ -337,20 +337,20 @@ True
 False
 ```
 
-Makes sense, right?
+Zrozumiałe, no nie?
 
-#### 💡 Explanation:
-+ The behavior in first and second snippets is due to a CPython optimization (called string interning) that tries to use existing immutable objects in some cases rather than creating a new object every time.
-+ After being "interned," many variables may reference the same string object in memory (saving memory thereby).
-+ In the snippets above, strings are implicitly interned. The decision of when to implicitly intern a string is implementation-dependent. There are some rules that can be used to guess if a string will be interned or not:
-  * All length 0 and length 1 strings are interned.
-  * Strings are interned at compile time (`'wtf'` will be interned but `''.join(['w', 't', 'f']` will not be interned)
-  * Strings that are not composed of ASCII letters, digits or underscores, are not interned. This explains why `'wtf!'` was not interned due to `!`. CPython implementation of this rule can be found [here](https://github.com/python/cpython/blob/3.6/Objects/codeobject.c#L19)
-  ![image](/images/string-intern/string_intern.png)
-+ When `a` and `b` are set to `"wtf!"` in the same line, the Python interpreter creates a new object, then references the second variable at the same time. If you do it on separate lines, it doesn't "know" that there's already `wtf!` as an object (because `"wtf!"` is not implicitly interned as per the facts mentioned above). It's a compile-time optimization. This optimization doesn't apply to 3.7.x versions of CPython (check this [issue](https://github.com/satwikkansal/wtfpython/issues/100) for more discussion).
-+ A compile unit in an interactive environment like IPython consists of a single statement, whereas it consists of the entire module in case of modules. `a, b = "wtf!", "wtf!"` is single statement, whereas `a = "wtf!"; b = "wtf!"` are two statements in a single line. This explains why the identities are different in `a = "wtf!"; b = "wtf!"`, and also explain why they are same when invoked in `some_file.py`
-+ The abrupt change in the output of the fourth snippet is due to a [peephole optimization](https://en.wikipedia.org/wiki/Peephole_optimization) technique known as Constant folding. This means the expression `'a'*20` is replaced by `'aaaaaaaaaaaaaaaaaaaa'` during compilation to save a  few clock cycles during runtime. Constant folding only occurs for strings having a length of less than 20. (Why? Imagine the size of `.pyc` file generated as a result of the expression `'a'*10**10`). [Here's](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288) the implementation source for the same.
-+ Note: In Python 3.7, Constant folding was moved out from peephole optimizer to the new AST optimizer with some change in logic as well, so the third snippet doesn't work for Python 3.7. You can read more about the change [here](https://bugs.python.org/issue11549). 
+#### 💡 Wyjaśnienie:
++ Zachowanie w pierwszym i drugim fragmencie jest związane z optymalizacją CPython (nazywaną string interning [w polskiej wersji będę używał określenia 'odcinanie', które dobrze oddaje sens tego działania]), która stara się użyć w pewnych przypadkach istniejące niemutowalne obiekty zamiast tworzyć nowy obiekt za każdym razem.
++ Po byciu 'odciętym', wiele zmiennych odwołuje się do tego obiektu string w pamięci (oszczędzając użycie pamięci tym sposobem).
++ We fragmentach powyżej stringi są niejawnie odcinane. Decyzja o tym, kiedy niejawnie odciąć stringa jest zależna od implementacji. Są pewne zasady, które mogą pomóc w odgadnięciu czy string będzie odcięty czy nie:
+    * Wszystkie stringi o ilości znaków 0 lub jeden są odcinane.
+    * Stringi są odcinane w momencie kompilacji (`'wtf'` będzie odcięte ale już `''.join(['w', 't', 'f']` nie będzie)
+    * Stringi, które nie są zbudowane ze znaków ASCII, cyfr lub znaków podkreślenia, nie są odcinane. To tłumaczy dlaczego `'wtf!'` nie zostało odcięte posiadając `!`. Implementacja tych zasad w CPython jest do sprawdzenia [tutaj](https://github.com/python/cpython/blob/3.6/Objects/codeobject.c#L19)
+    ![image](/images/string-intern/string_intern.png)
++ Gdy do `a` i `b` jest przypisane `"wtf!"` w tym samym wierszu kodu, interpreter Pythona tworzy nowy obiekt, na który w tym samym czasie wskazuje pierwszą i drugą zmienną. Jeśli przypisania są w oddzielnych liniach, interpreter nie wie, że jest już `wtf!` jako obiekt (ponieważ `"wtf!"` nie jest niejawnie odcięty w zgodzie z faktami powyżej). Jest to optymalizacja w czasie kompilacji. Ta optymalizacja nie występuje w wersjach 3.7.x CPython (w tym [issue](https://github.com/satwikkansal/wtfpython/issues/100) znajdziesz dyskusję na ten temat).
++ Jednostka kompilująca w środowisku interaktywnym, takim jak IPython składa się z pojedynczego wyrażenia, natomiast w przypadku modułów składa się z całego modułu. `a, b = "wtf!", "wtf!"` to pojedyncze wyrażenie, podczas gdy `a = "wtf!"; b = "wtf!"` to dwa wyrażenia w jednym wierszu. To wyjaśnia, dlaczego tożsamości są różne w `a = "wtf!"; b = "wtf!"`, a także wyjaśnia, dlaczego są one takie same, gdy są wywoływane w `some_file.py`
++ Nagła zmiana wyniku czwartego fragmentu jest spowodowana techniką [peephole optimization](https://en.wikipedia.org/wiki/Peephole_optimization) znaną jako składanie stałych (Constant folding). Oznacza to, że wyrażenie `'a'*20` jest zastępowane przez `'aaaaaaaaaaaaaaaaaaa'` podczas kompilacji, aby zaoszczędzić kilka cykli zegara w czasie wykonywania. Zwijanie stałych występuje tylko w przypadku stringów o długości mniejszej niż 20. (Dlaczego? Wyobraź sobie jakiś plik `.pyc` wygenerowany jako rezultat wyrażenia `'a'*10**10`). [Tutaj](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288) znajdziesz opis implementacji tej optymalizacji.
++ Uwaga: W Python 3.7 składanie stałych zostało przeniesione z optymizatora peephole do nowego optymizatora AST z pewnymi zmianami w logice, stąd trzeci fragment nie działa dla Python 3.7. Więcej na ten temat możesz przeczytać [tutaj](https://bugs.python.org/issue11549).
 
 ---
 
