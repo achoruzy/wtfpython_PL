@@ -401,7 +401,7 @@ Więc dlaczego "Python" jest w każdym z miejsc?
 
 ---
 
-### ▶ Deep down, we're all the same.
+### ▶ Bo wszyscy polacy to jedna rodzina
 <!-- Example ID: 8f99a35f-1736-43e2-920d-3b78ec35da9b --->
 ```py
 class WTF:
@@ -410,29 +410,30 @@ class WTF:
 
 **Output:**
 ```py
->>> WTF() == WTF() # two different instances can't be equal
+>>> WTF() == WTF() # dwie oddzielne instancje nie mogą być równe
 False
->>> WTF() is WTF() # identities are also different
+>>> WTF() is WTF() # tożsamości obiektów również są różne
 False
->>> hash(WTF()) == hash(WTF()) # hashes _should_ be different as well
+>>> hash(WTF()) == hash(WTF()) # hashe _powinny_ być również różne
 True
 >>> id(WTF()) == id(WTF())
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* When `id` was called, Python created a `WTF` class object and passed it to the `id` function. The `id` function takes its `id` (its memory location), and throws away the object. The object is destroyed.
-* When we do this twice in succession, Python allocates the same memory location to this second object as well. Since (in CPython) `id` uses the memory location as the object id, the id of the two objects is the same.
-* So, the object's id is unique only for the lifetime of the object. After the object is destroyed, or before it is created, something else can have the same id.
-* But why did the `is` operator evaluated to `False`? Let's see with this snippet.
+* Gdy `id` zostało wywołane, python stworzył obiekt klasy `WTF` i podał go do funkcji `id`. Funkcja `id` użyła id obiektu (adres obiektu w pamięci), i odrzuciła sam obiekt, który został usunięty.
+* Gdy zrobimy to raz za razem, python alokuje ten sam adres pamięci również do drugiego obiektu. Odkąd (w CPython) `id` używa adresu pamięci jako id obiektu, id obydwu obiektów będzie tym samym id.
+* A więc id obiektu będzie unikalne tylko na czas istnienia tego obiektu. Po tym jak obiekt zostanie usunięty lub przed tym jak zostanie stworzony, inny obiekt może posiadać to id.
+* ale dlaczego operator `is` zwrócił `False`? Spójrzmy na fragment kodu.
+
   ```py
   class WTF(object):
     def __init__(self): print("I")
     def __del__(self): print("D")
   ```
 
-  **Output:**
+  **Wynik:**
   ```py
   >>> WTF() is WTF()
   I
@@ -447,7 +448,7 @@ True
   D
   True
   ```
-  As you may observe, the order in which the objects are destroyed is what made all the difference here.
+  Jak widać, kolejność, w której obiekty są niszczone tłumaczy różnicę.
 
 ---
 
