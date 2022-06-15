@@ -220,7 +220,7 @@ SyntaxError: invalid syntax
 
 
 
-#### 💡 Wytłumaczenie
+#### 💡 Wyjaśnienie
 
 **Szybkie przypomnienie o walrus operator**
 
@@ -354,7 +354,7 @@ Zrozumiałe, no nie?
 
 ---
 
-### ▶ Hash brownies
+### ▶ Ciasteczka z hashem
 <!-- Example ID: eb17db53-49fd-4b61-85d6-345c5ca213ff --->
 1\.
 ```py
@@ -364,12 +364,12 @@ some_dict[5.0] = "Ruby"
 some_dict[5] = "Python"
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> some_dict[5.5]
 "JavaScript"
->>> some_dict[5.0] # "Python" destroyed the existence of "Ruby"?
+>>> some_dict[5.0] # czy "Python" zamordował "Ruby"?
 "Python"
 >>> some_dict[5] 
 "Python"
@@ -381,22 +381,23 @@ complex
 "Python"
 ```
 
-So, why is Python all over the place?
+Więc dlaczego "Python" jest w każdym z miejsc?
 
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-* Python dictionaries check for equality and compare the hash value to determine if two keys are the same.
-* Immutable objects with the same value always have the same hash in Python.
+* Słowniki (dicty) w pythonie podczas wywoływania i przypisywania sprawdzają równość wartości i porównują wartość hasha aby stwierdzić czy klucze są tożsame.
+* W pythonie niemutowalne obiekty mające tą samą wartość mają zawsze taki sam hash.
   ```py
   >>> 5 == 5.0 == 5 + 0j
   True
   >>> hash(5) == hash(5.0) == hash(5 + 0j)
   True
   ```
-  **Note:** Objects with different values may also have same hash (known as [hash collision](https://en.wikipedia.org/wiki/Collision_(computer_science))).
-* When the statement `some_dict[5] = "Python"` is executed, the existing value "Ruby" is overwritten with "Python" because Python recognizes `5` and `5.0` as the same keys of the dictionary `some_dict`.
-* This StackOverflow [answer](https://stackoverflow.com/a/32211042/4354153) explains the rationale behind it.
+  **Uwaga:** Obiekty z różnymi wartościami również mogą mieć taki sam hash (jest to znane jako [hash collision](https://en.wikipedia.org/wiki/Collision_(computer_science))).
+
+* Gdy wyrażenie `some_dict[5] = "Python"` jest wykonywane, istniejąca wartość "Ruby" jest nadpisywana przez "Python" ponieważ python rozpoznaje `5` i `5.0` jako ten sam klucz w słowniku `some_dict`.
+*  [Ta odpowiedź](https://stackoverflow.com/a/32211042/4354153) na StackOverflow przedstawia racjonalne wyjaśnienie stojące za tym problemem.
 
 ---
 
