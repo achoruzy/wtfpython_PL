@@ -220,7 +220,7 @@ SyntaxError: invalid syntax
 
 
 
-#### 💡 Wytłumaczenie
+#### 💡 Wyjaśnienie
 
 **Szybkie przypomnienie o walrus operator**
 
@@ -354,7 +354,7 @@ Zrozumiałe, no nie?
 
 ---
 
-### ▶ Hash brownies
+### ▶ Ciasteczka z hashem
 <!-- Example ID: eb17db53-49fd-4b61-85d6-345c5ca213ff --->
 1\.
 ```py
@@ -364,12 +364,12 @@ some_dict[5.0] = "Ruby"
 some_dict[5] = "Python"
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> some_dict[5.5]
 "JavaScript"
->>> some_dict[5.0] # "Python" destroyed the existence of "Ruby"?
+>>> some_dict[5.0] # czy "Python" zamordował "Ruby"?
 "Python"
 >>> some_dict[5] 
 "Python"
@@ -381,26 +381,27 @@ complex
 "Python"
 ```
 
-So, why is Python all over the place?
+Więc dlaczego "Python" jest w każdym z miejsc?
 
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-* Python dictionaries check for equality and compare the hash value to determine if two keys are the same.
-* Immutable objects with the same value always have the same hash in Python.
+* Słowniki (dicty) w pythonie podczas wywoływania i przypisywania sprawdzają równość wartości i porównują wartość hasha aby stwierdzić czy klucze są tożsame.
+* W pythonie niemutowalne obiekty mające tą samą wartość mają zawsze taki sam hash.
   ```py
   >>> 5 == 5.0 == 5 + 0j
   True
   >>> hash(5) == hash(5.0) == hash(5 + 0j)
   True
   ```
-  **Note:** Objects with different values may also have same hash (known as [hash collision](https://en.wikipedia.org/wiki/Collision_(computer_science))).
-* When the statement `some_dict[5] = "Python"` is executed, the existing value "Ruby" is overwritten with "Python" because Python recognizes `5` and `5.0` as the same keys of the dictionary `some_dict`.
-* This StackOverflow [answer](https://stackoverflow.com/a/32211042/4354153) explains the rationale behind it.
+  **Uwaga:** Obiekty z różnymi wartościami również mogą mieć taki sam hash (jest to znane jako [hash collision](https://en.wikipedia.org/wiki/Collision_(computer_science))).
+
+* Gdy wyrażenie `some_dict[5] = "Python"` jest wykonywane, istniejąca wartość "Ruby" jest nadpisywana przez "Python" ponieważ python rozpoznaje `5` i `5.0` jako ten sam klucz w słowniku `some_dict`.
+*  [Ta odpowiedź](https://stackoverflow.com/a/32211042/4354153) na StackOverflow przedstawia racjonalne wyjaśnienie stojące za tym problemem.
 
 ---
 
-### ▶ Deep down, we're all the same.
+### ▶ Bo wszyscy polacy to jedna rodzina
 <!-- Example ID: 8f99a35f-1736-43e2-920d-3b78ec35da9b --->
 ```py
 class WTF:
@@ -409,29 +410,30 @@ class WTF:
 
 **Output:**
 ```py
->>> WTF() == WTF() # two different instances can't be equal
+>>> WTF() == WTF() # dwie oddzielne instancje nie mogą być równe
 False
->>> WTF() is WTF() # identities are also different
+>>> WTF() is WTF() # tożsamości obiektów również są różne
 False
->>> hash(WTF()) == hash(WTF()) # hashes _should_ be different as well
+>>> hash(WTF()) == hash(WTF()) # hashe _powinny_ być również różne
 True
 >>> id(WTF()) == id(WTF())
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* When `id` was called, Python created a `WTF` class object and passed it to the `id` function. The `id` function takes its `id` (its memory location), and throws away the object. The object is destroyed.
-* When we do this twice in succession, Python allocates the same memory location to this second object as well. Since (in CPython) `id` uses the memory location as the object id, the id of the two objects is the same.
-* So, the object's id is unique only for the lifetime of the object. After the object is destroyed, or before it is created, something else can have the same id.
-* But why did the `is` operator evaluated to `False`? Let's see with this snippet.
+* Gdy `id` zostało wywołane, python stworzył obiekt klasy `WTF` i podał go do funkcji `id`. Funkcja `id` użyła id obiektu (adres obiektu w pamięci), i odrzuciła sam obiekt, który został usunięty.
+* Gdy zrobimy to raz za razem, python alokuje ten sam adres pamięci również do drugiego obiektu. Odkąd (w CPython) `id` używa adresu pamięci jako id obiektu, id obydwu obiektów będzie tym samym id.
+* A więc id obiektu będzie unikalne tylko na czas istnienia tego obiektu. Po tym jak obiekt zostanie usunięty lub przed tym jak zostanie stworzony, inny obiekt może posiadać to id.
+* ale dlaczego operator `is` zwrócił `False`? Spójrzmy na fragment kodu.
+
   ```py
   class WTF(object):
     def __init__(self): print("I")
     def __del__(self): print("D")
   ```
 
-  **Output:**
+  **Wynik:**
   ```py
   >>> WTF() is WTF()
   I
@@ -446,7 +448,7 @@ True
   D
   True
   ```
-  As you may observe, the order in which the objects are destroyed is what made all the difference here.
+  Jak widać, kolejność, w której obiekty są niszczone tłumaczy różnicę.
 
 ---
 
