@@ -452,7 +452,7 @@ True
 
 ---
 
-### ▶ Disorder within order *
+### ▶ Uporządkowany nieporządek *
 <!-- Example ID: 91bff1f8-541d-455a-9de4-6cd8ff00ea66 --->
 ```py
 from collections import OrderedDict
@@ -468,36 +468,36 @@ another_ordered_dict[2] = 'b'; another_ordered_dict[1] = 'a';
 
 class DictWithHash(dict):
     """
-    A dict that also implements __hash__ magic.
+    Dict z implementacją magicznej metody __hash__.
     """
     __hash__ = lambda self: 0
 
 class OrderedDictWithHash(OrderedDict):
     """
-    An OrderedDict that also implements __hash__ magic.
+    OrderedDict z implementacją magicznej metody __hash__.
     """
     __hash__ = lambda self: 0
 ```
 
-**Output**
+**Wynik**
 ```py
->>> dictionary == ordered_dict # If a == b
+>>> dictionary == ordered_dict # Jeśli a == b ...
 True
->>> dictionary == another_ordered_dict # and b == c
+>>> dictionary == another_ordered_dict # ...i b == c
 True
->>> ordered_dict == another_ordered_dict # the why isn't c == a ??
+>>> ordered_dict == another_ordered_dict # ...to dlaczego nie c == a ??
 False
 
-# We all know that a set consists of only unique elements,
-# let's try making a set of these dictionaries and see what happens...
+# Wszyscy wiemy, że typ set zawiera jedynie unikalne elementy,
+# spróbujmy więc stworzyć set z tych słowników i sprawdźmy co się wydarzy...
 
 >>> len({dictionary, ordered_dict, another_ordered_dict})
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: unhashable type: 'dict'
 
-# Makes sense since dict don't have __hash__ implemented, let's use
-# our wrapper classes.
+# Ma to sens jako, że dict nie posiada implementacji metody __hash__.  
+# Użyjmy naszych klas-wrapperów.
 >>> dictionary = DictWithHash()
 >>> dictionary[1] = 'a'; dictionary[2] = 'b';
 >>> ordered_dict = OrderedDictWithHash()
@@ -506,22 +506,22 @@ TypeError: unhashable type: 'dict'
 >>> another_ordered_dict[2] = 'b'; another_ordered_dict[1] = 'a';
 >>> len({dictionary, ordered_dict, another_ordered_dict})
 1
->>> len({ordered_dict, another_ordered_dict, dictionary}) # changing the order
+>>> len({ordered_dict, another_ordered_dict, dictionary}) # zmieniając kolejność
 2
 ```
 
-What is going on here?
+Co się tutaj odwaliło?
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- The reason why intransitive equality didn't hold among `dictionary`, `ordered_dict` and `another_ordered_dict` is because of the way `__eq__` method is implemented in `OrderedDict` class. From the [docs](https://docs.python.org/3/library/collections.html#ordereddict-objects)
+- Równość pomiędzy `dictionary`, `ordered_dict` i `another_ordered_dict` nie występuje z powodu metody `__eq__` zaimplementowanej w klasie `OrderedDict`. temat do sprawdzenia [tutaj](https://docs.python.org/3/library/collections.html#ordereddict-objects)
   
-    > Equality tests between OrderedDict objects are order-sensitive and are implemented as `list(od1.items())==list(od2.items())`. Equality tests between `OrderedDict` objects and other Mapping objects are order-insensitive like regular dictionaries.
-- The reason for this equality is behavior is that it allows `OrderedDict` objects to be directly substituted anywhere a regular dictionary is used.
-- Okay, so why did changing the order affect the lenght of the generated `set` object? The answer is the lack of intransitive equality only. Since sets are "unordered" collections of unique elements, the order in which elements are inserted shouldn't matter. But in this case, it does matter. Let's break it down a bit,
+    > Sprawdzenie równości obiektów OrderedDict jest wrażliwe na kolejność, ponadto będąc zaimplementowane jako `list(od1.items())==list(od2.items())`.Sprawdzenie równości pomiędzy obiektami `OrderedDict` i innymi obiektami mapującymy (Mapping objects) jest niewrażliwe na kolejność jak przy zwykłych słownikach (dict).
+- Powód, dla którego taka implementacja sprawdzania równości została wprowadzona, to umożliwienie obiektom `OrderedDict` bycie bezpośrednim substytutem podstawowych obiektów `dict` tam są użyte.
+- OK, ale dlaczego zmiana kolejności wpływa na wygenerowanie obiektu `set`? Odpowiedzią jest po prostu brak przenoszonej równości. Jako, że sety są "nieuporządkowanymi" kolekcjami unikalnych elementów, kolejność dodawanych elementów nie powinna mieć znaczenia. Jednak w tej sytuacji ta własność nie ma znaczenia. Sprawdźmy to.
     ```py
     >>> some_set = set()
-    >>> some_set.add(dictionary) # these are the mapping objects from the snippets above
+    >>> some_set.add(dictionary) # dodajemy obiekty mapujące z fragmentów kodu wyżej
     >>> ordered_dict in some_set
     True
     >>> some_set.add(ordered_dict)
@@ -546,7 +546,7 @@ What is going on here?
     >>> len(another_set)
     2
     ```
-    So the inconsistency is due to `another_ordered_dict in another_set` being `False` because `ordered_dict` was already present in `another_set` and as observed before, `ordered_dict == another_ordered_dict` is `False`.
+    A więc niespójność występuje przez `another_ordered_dict in another_set` równe `False` ponieważ `ordered_dict` był już obecny w `another_set` i jak zaobserwowano wcześniej, `ordered_dict == another_ordered_dict` jest równe `False`.
 
 ---
 
