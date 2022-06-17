@@ -664,20 +664,20 @@ for i, some_dict[i] in enumerate(some_string):
 
 ---
 
-### ▶ Evaluation time discrepancy
+### ▶ Rozbieżności podczas sprawdzania
 <!-- Example ID: 6aa11a4b-4cf1-467a-b43a-810731517e98 --->
 1\.
 ```py
 array = [1, 8, 15]
-# A typical generator expresion
+# Typowo stworzony generator
 gen = (x for x in array if array.count(x) > 0)
 array = [2, 8, 22]
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
->>> print(list(gen)) # Where did the other values go?
+>>> print(list(gen)) # Gdzie podziały się pozostałe wartości?
 [8]
 ```
 
@@ -693,7 +693,7 @@ gen_2 = (x for x in array_2)
 array_2[:] = [1,2,3,4,5]
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> print(list(gen_1))
 [1, 2, 3, 4]
@@ -713,22 +713,22 @@ array_3 = [4, 5, 6]
 array_4 = [400, 500, 600]
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> print(list(gen))
 [401, 501, 601, 402, 502, 602, 403, 503, 603]
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- In a [generator](https://wiki.python.org/moin/Generators) expression, the `in` clause is evaluated at declaration time, but the conditional clause is evaluated at runtime.
-- So before runtime, `array` is re-assigned to the list `[2, 8, 22]`, and since out of `1`, `8` and `15`, only the count of `8` is greater than `0`, the generator only yields `8`.
-- The differences in the output of `g1` and `g2` in the second part is due the way variables `array_1` and `array_2` are re-assigned values.
-- In the first case, `array_1` is binded to the new object `[1,2,3,4,5]` and since the `in` clause is evaluated at the declaration time it still refers to the old object `[1,2,3,4]` (which is not destroyed).
-- In the second case, the slice assignment to `array_2` updates the same old object `[1,2,3,4]` to `[1,2,3,4,5]`. Hence both the `g2` and `array_2` still have reference to the same object (which has now been updated to `[1,2,3,4,5]`).
-- Okay, going by the logic discussed so far, shouldn't be the value of `list(g)` in the third snippet be `[11, 21, 31, 12, 22, 32, 13, 23, 33]`? (because `array_3` and `array_4` are going to behave just like `array_1`). The reason why (only) `array_4` values got updated is explained in [PEP-289](https://www.python.org/dev/peps/pep-0289/#the-details)
+- W [generatorach](https://wiki.python.org/moin/Generators) człon `in` jest sprawdzany w czasie deklaracji ale człon warunkujący już podczas wykonywania.
+- Przed samym wykonaniem `array` jest ponownie przypisany do listy `[2, 8, 22]`, i skoro brakuje w niej `1` i `15`, a tylko ilość `8` jest większa niż `0`, generator wydaje tylko `8`.
+- Różnica pomiędzy wynikami `gen_1` i `gen_2` w drugim fragmencie wynika z tego jak zmienne `array_1` i `array_2` mają ponownie przypisywane wartości.
+- W pierwszym przypadku `array_1` jest związany z nowym obiektem `[1,2,3,4,5]` i skoro `in` jest sprawdzany w czasie deklaracji to nadal odnosi się do starego obiektu `[1,2,3,4]` (który został zniszczony).
+- W drugim przypadku, przypisanie części (slice) listy `array_2` aktualizuje ten stary obiekt `[1,2,3,4]` do `[1,2,3,4,5]`. Stąd oba `gen_2` i `array_2` nadal wskazują na ten sam obiekt (który został teraz zaktualizowany do `[1,2,3,4,5]`).
+- OK, idąc za omawianą logiką, czy wartość `list(gen)` w trzecim fragmencie nie powinna być równa `[11, 21, 31, 12, 22, 32, 13, 23, 33]`? (skoro `array_3` i `array_4` będą się zachowywały jak `array_1`). Powód, dla którego tylko wartości z `array_4` zostały zaktualizowane znajduje się w [PEP-289](https://www.python.org/dev/peps/pep-0289/#the-details)
   
-    > Only the outermost for-expression is evaluated immediately, the other expressions are deferred until the generator is run.
+    > Tylko wyrażenie najbardziej na wierzchu (pierwsze) pętli for jest sprawdzane natychmiast, pozostałe wyrażenia są odraczane do momentu uruchomienia generatora.
 
 ---
 
