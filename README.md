@@ -550,7 +550,7 @@ Co się tutaj odwaliło?
 
 ---
 
-### ▶ Keep trying... *
+### ▶ Próbuj, próbuj... *
 <!-- Example ID: b4349443-e89f-4d25-a109-82616be9d41a --->
 ```py
 def some_func():
@@ -566,13 +566,13 @@ def another_func():
         finally:
             print("Finally!")
 
-def one_more_func(): # A gotcha!
+def one_more_func(): # Przyłapana!
     try:
         for i in range(3):
             try:
                 1 / i
             except ZeroDivisionError:
-                # Let's throw it here and handle it outside for loop
+                # Wyrzućmy błąd tutaj i zajmijmy się nim na zewnątrz pętli for
                 raise ZeroDivisionError("A trivial divide by zero error")
             finally:
                 print("Iteration", i)
@@ -581,7 +581,7 @@ def one_more_func(): # A gotcha!
         print("Zero division error ocurred", e)
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> some_func()
@@ -602,11 +602,11 @@ Iteration 0
 
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- When a `return`, `break` or `continue` statement is executed in the `try` suite of a "try…finally" statement, the `finally` clause is also executed on the way out.
-- The return value of a function is determined by the last `return` statement executed. Since the `finally` clause always executes, a `return` statement executed in the `finally` clause will always be the last one executed.
-- The caveat here is, if the finally clause executes a `return` or `break` statement, the temporarily saved exception is discarded.
+- Jeśli `return`, `break` lub `continue` są wywołane w sekcji `try` wyrażenia "try…finally", sekcja `finally` jest również wywoływana na koniec.
+- Wartość zwracana jest determinowana przez ostatni wywołany `return`. Jako, że sekcja `finally` jest zawsze wywoływana, `return` wywoływany w `finally` będzie zawsze tym ostatnim.
+- Ciekawostką jest, że jeśli sekcja `finally` wywołuje `return` lub `break` to tymczasowo zapamiętany wyjątek (błąd) zostaje zapomniany.
 
 ---
 
