@@ -622,25 +622,25 @@ for i, some_dict[i] in enumerate(some_string):
 
 **Output:**
 ```py
->>> some_dict # An indexed dict appears.
+>>> some_dict # Powstaje słownik z indeksami
 {0: 'w', 1: 't', 2: 'f'}
 ```
 
-####  💡 Explanation:
+####  💡 Wyjaśnienie:
 
-* A `for` statement is defined in the [Python grammar](https://docs.python.org/3/reference/grammar.html) as:
+* Wyrażenie `for` jest zdefiniowane w [Python grammar](https://docs.python.org/3/reference/grammar.html) jako:
   ```
   for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite]
   ```
-  Where `exprlist` is the assignment target. This means that the equivalent of `{exprlist} = {next_value}` is **executed for each item** in the iterable.
-  An interesting example that illustrates this:
+  Gdzie `exprlist` to cel przypisania wartości. Oznacza to, że tożsame dla `{exprlist} = {next_value}` jest **wykonanie dla każdej wartości** w iteratorze.
+  Ciekawy przykład, który to ilustruje:
   ```py
   for i in range(4):
       print(i)
       i = 10
   ```
 
-  **Output:**
+  **Wynik:**
   ```
   0
   1
@@ -648,13 +648,13 @@ for i, some_dict[i] in enumerate(some_string):
   3
   ```
 
-  Did you expect the loop to run just once?
+  Spodziewałeś się wykonania pętli tylko raz?
 
-  **💡 Explanation:**
+  **💡 Wyjaśnienie:**
 
-  - The assignment statement `i = 10` never affects the iterations of the loop because of the way for loops work in Python. Before the beginning of every iteration, the next item provided by the iterator (`range(4)` this case) is unpacked and assigned the target list variables (`i` in this case).
+    - Wyrażenie przypisania `i = 10` nigdy nie wpływa na wykonanie pętli, z uwagi na to jak działa wykonywanie pętli w Python. Przed rozpoczęciem każdej iteracji, kolejna wartość wydawana przez iterator (`range(4)` w tym przypadku) jest wypakowana i przypisana do listy zmiennych docelowych (`i` w tym przypadku).
 
-* The `enumerate(some_string)` function yields a new value `i` (a counter going up) and a character from the `some_string` in each iteration. It then sets the (just assigned) `i` key of the dictionary `some_dict` to that character. The unrolling of the loop can be simplified as:
+* Funkcja `enumerate(some_string)` wydaje nową wartość `i` (licznik narastający) i literę z  `some_string` w każdej iteracji. Następnie ustawia (dopiero co przypisany) klucz `i` słownika `some_dict` do tej litery. Rozwinięcie pętli można pokazać prościej jako:
   ```py
   >>> i, some_dict[i] = (0, 'w')
   >>> i, some_dict[i] = (1, 't')
