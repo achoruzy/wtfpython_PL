@@ -550,7 +550,7 @@ Co się tutaj odwaliło?
 
 ---
 
-### ▶ Keep trying... *
+### ▶ Próbuj, próbuj... *
 <!-- Example ID: b4349443-e89f-4d25-a109-82616be9d41a --->
 ```py
 def some_func():
@@ -566,13 +566,13 @@ def another_func():
         finally:
             print("Finally!")
 
-def one_more_func(): # A gotcha!
+def one_more_func(): # Przyłapana!
     try:
         for i in range(3):
             try:
                 1 / i
             except ZeroDivisionError:
-                # Let's throw it here and handle it outside for loop
+                # Wyrzućmy błąd tutaj i zajmijmy się nim na zewnątrz pętli for
                 raise ZeroDivisionError("A trivial divide by zero error")
             finally:
                 print("Iteration", i)
@@ -581,7 +581,7 @@ def one_more_func(): # A gotcha!
         print("Zero division error ocurred", e)
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> some_func()
@@ -602,11 +602,11 @@ Iteration 0
 
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- When a `return`, `break` or `continue` statement is executed in the `try` suite of a "try…finally" statement, the `finally` clause is also executed on the way out.
-- The return value of a function is determined by the last `return` statement executed. Since the `finally` clause always executes, a `return` statement executed in the `finally` clause will always be the last one executed.
-- The caveat here is, if the finally clause executes a `return` or `break` statement, the temporarily saved exception is discarded.
+- Jeśli `return`, `break` lub `continue` są wywołane w sekcji `try` wyrażenia "try…finally", sekcja `finally` jest również wywoływana na koniec.
+- Wartość zwracana jest determinowana przez ostatni wywołany `return`. Jako, że sekcja `finally` jest zawsze wywoływana, `return` wywoływany w `finally` będzie zawsze tym ostatnim.
+- Ciekawostką jest, że jeśli sekcja `finally` wywołuje `return` lub `break` to tymczasowo zapamiętany wyjątek (błąd) zostaje zapomniany.
 
 ---
 
@@ -622,25 +622,25 @@ for i, some_dict[i] in enumerate(some_string):
 
 **Output:**
 ```py
->>> some_dict # An indexed dict appears.
+>>> some_dict # Powstaje słownik z indeksami
 {0: 'w', 1: 't', 2: 'f'}
 ```
 
-####  💡 Explanation:
+####  💡 Wyjaśnienie:
 
-* A `for` statement is defined in the [Python grammar](https://docs.python.org/3/reference/grammar.html) as:
+* Wyrażenie `for` jest zdefiniowane w [Python grammar](https://docs.python.org/3/reference/grammar.html) jako:
   ```
   for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite]
   ```
-  Where `exprlist` is the assignment target. This means that the equivalent of `{exprlist} = {next_value}` is **executed for each item** in the iterable.
-  An interesting example that illustrates this:
+  Gdzie `exprlist` to cel przypisania wartości. Oznacza to, że tożsame dla `{exprlist} = {next_value}` jest **wykonanie dla każdej wartości** w iteratorze.
+  Ciekawy przykład, który to ilustruje:
   ```py
   for i in range(4):
       print(i)
       i = 10
   ```
 
-  **Output:**
+  **Wynik:**
   ```
   0
   1
@@ -648,13 +648,13 @@ for i, some_dict[i] in enumerate(some_string):
   3
   ```
 
-  Did you expect the loop to run just once?
+  Spodziewałeś się wykonania pętli tylko raz?
 
-  **💡 Explanation:**
+  **💡 Wyjaśnienie:**
 
-  - The assignment statement `i = 10` never affects the iterations of the loop because of the way for loops work in Python. Before the beginning of every iteration, the next item provided by the iterator (`range(4)` this case) is unpacked and assigned the target list variables (`i` in this case).
+    - Wyrażenie przypisania `i = 10` nigdy nie wpływa na wykonanie pętli, z uwagi na to jak działa wykonywanie pętli w Python. Przed rozpoczęciem każdej iteracji, kolejna wartość wydawana przez iterator (`range(4)` w tym przypadku) jest wypakowana i przypisana do listy zmiennych docelowych (`i` w tym przypadku).
 
-* The `enumerate(some_string)` function yields a new value `i` (a counter going up) and a character from the `some_string` in each iteration. It then sets the (just assigned) `i` key of the dictionary `some_dict` to that character. The unrolling of the loop can be simplified as:
+* Funkcja `enumerate(some_string)` wydaje nową wartość `i` (licznik narastający) i literę z  `some_string` w każdej iteracji. Następnie ustawia (dopiero co przypisany) klucz `i` słownika `some_dict` do tej litery. Rozwinięcie pętli można pokazać prościej jako:
   ```py
   >>> i, some_dict[i] = (0, 'w')
   >>> i, some_dict[i] = (1, 't')
@@ -664,20 +664,20 @@ for i, some_dict[i] in enumerate(some_string):
 
 ---
 
-### ▶ Evaluation time discrepancy
+### ▶ Rozbieżności podczas sprawdzania
 <!-- Example ID: 6aa11a4b-4cf1-467a-b43a-810731517e98 --->
 1\.
 ```py
 array = [1, 8, 15]
-# A typical generator expresion
+# Typowo stworzony generator
 gen = (x for x in array if array.count(x) > 0)
 array = [2, 8, 22]
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
->>> print(list(gen)) # Where did the other values go?
+>>> print(list(gen)) # Gdzie podziały się pozostałe wartości?
 [8]
 ```
 
@@ -693,7 +693,7 @@ gen_2 = (x for x in array_2)
 array_2[:] = [1,2,3,4,5]
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> print(list(gen_1))
 [1, 2, 3, 4]
@@ -713,28 +713,28 @@ array_3 = [4, 5, 6]
 array_4 = [400, 500, 600]
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> print(list(gen))
 [401, 501, 601, 402, 502, 602, 403, 503, 603]
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- In a [generator](https://wiki.python.org/moin/Generators) expression, the `in` clause is evaluated at declaration time, but the conditional clause is evaluated at runtime.
-- So before runtime, `array` is re-assigned to the list `[2, 8, 22]`, and since out of `1`, `8` and `15`, only the count of `8` is greater than `0`, the generator only yields `8`.
-- The differences in the output of `g1` and `g2` in the second part is due the way variables `array_1` and `array_2` are re-assigned values.
-- In the first case, `array_1` is binded to the new object `[1,2,3,4,5]` and since the `in` clause is evaluated at the declaration time it still refers to the old object `[1,2,3,4]` (which is not destroyed).
-- In the second case, the slice assignment to `array_2` updates the same old object `[1,2,3,4]` to `[1,2,3,4,5]`. Hence both the `g2` and `array_2` still have reference to the same object (which has now been updated to `[1,2,3,4,5]`).
-- Okay, going by the logic discussed so far, shouldn't be the value of `list(g)` in the third snippet be `[11, 21, 31, 12, 22, 32, 13, 23, 33]`? (because `array_3` and `array_4` are going to behave just like `array_1`). The reason why (only) `array_4` values got updated is explained in [PEP-289](https://www.python.org/dev/peps/pep-0289/#the-details)
+- W [generatorach](https://wiki.python.org/moin/Generators) człon `in` jest sprawdzany w czasie deklaracji ale człon warunkujący już podczas wykonywania.
+- Przed samym wykonaniem `array` jest ponownie przypisany do listy `[2, 8, 22]`, i skoro brakuje w niej `1` i `15`, a tylko ilość `8` jest większa niż `0`, generator wydaje tylko `8`.
+- Różnica pomiędzy wynikami `gen_1` i `gen_2` w drugim fragmencie wynika z tego jak zmienne `array_1` i `array_2` mają ponownie przypisywane wartości.
+- W pierwszym przypadku `array_1` jest związany z nowym obiektem `[1,2,3,4,5]` i skoro `in` jest sprawdzany w czasie deklaracji to nadal odnosi się do starego obiektu `[1,2,3,4]` (który został zniszczony).
+- W drugim przypadku, przypisanie części (slice) listy `array_2` aktualizuje ten stary obiekt `[1,2,3,4]` do `[1,2,3,4,5]`. Stąd oba `gen_2` i `array_2` nadal wskazują na ten sam obiekt (który został teraz zaktualizowany do `[1,2,3,4,5]`).
+- OK, idąc za omawianą logiką, czy wartość `list(gen)` w trzecim fragmencie nie powinna być równa `[11, 21, 31, 12, 22, 32, 13, 23, 33]`? (skoro `array_3` i `array_4` będą się zachowywały jak `array_1`). Powód, dla którego tylko wartości z `array_4` zostały zaktualizowane znajduje się w [PEP-289](https://www.python.org/dev/peps/pep-0289/#the-details)
   
-    > Only the outermost for-expression is evaluated immediately, the other expressions are deferred until the generator is run.
+    > Tylko wyrażenie najbardziej na wierzchu (pierwsze) pętli for jest sprawdzane natychmiast, pozostałe wyrażenia są odraczane do momentu uruchomienia generatora.
 
 ---
 
-### ▶ How not to use `is` operator
+### ▶ Jak nie używać operatora `is`
 <!-- Example ID: 230fa2ac-ab36-4ad1-b675-5f5a1c1a6217 --->
-The following is a very famous example present all over the internet.
+Poniżej jest dobrze znany i spotykany w internecie przykład.
 
 1\.
 
@@ -765,7 +765,7 @@ True
 ```
 
 3\.
-**Output**
+**Wynik**
 
 ```py
 >>> a, b = 257, 257
@@ -773,7 +773,7 @@ True
 True
 ```
 
-**Output (Python 3.7.x specifically)**
+**Wynik (jedynie dla Python 3.7.x)**
 
 ```py
 >>> a, b = 257, 257
@@ -781,25 +781,25 @@ True
 False
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-**The difference between `is` and `==`**
+**Różnica pomiędzy `is` i `==`**
 
-* `is` operator checks if both the operands refer to the same object (i.e., it checks if the identity of the operands matches or not).
-* `==` operator compares the values of both the operands and checks if they are the same.
-* So `is` is for reference equality and `==` is for value equality. An example to clear things up,
+* `is` sprawdza czy oba argumenty wskazują na ten sam obiekt(np. sprawdza czy id argumentów jest takie samo).
+* `==` sprawdza wartości argumentów i to czy są one takie same.
+* Więc `is` jest do sprawdzania wskazywania tego samego obiektu a `==` do sprawdzania równowartości. Przykład by to rozjaśnić,
   ```py
   >>> class A: pass
-  >>> A() is A() # These are two empty objects at two different memory locations.
+  >>> A() is A() # Są to dwa puste obiekty trzymane w dwóch różnych miejscach w pamięci.
   False
   ```
 
-**`256` is an existing object but `257` isn't**
+**`256` to istniejący już obiekt, a `257` nie**
 
-When you start up python the numbers from `-5` to `256` will be allocated. These numbers are used a lot, so it makes sense just to have them ready.
+Kiedy włączasz pythona, numery od `-5` do `256` będą już alokowane. Są one bardzo często używane, stąd rozsądne jest mieć je już w pogotowiu.
 
-Quoting from https://docs.python.org/3/c-api/long.html
-> The current implementation keeps an array of integer objects for all integers between -5 and 256, when you create an int in that range you just get back a reference to the existing object. So it should be possible to change the value of 1. I suspect the behavior of Python, in this case, is undefined. :-)
+Cytując z https://docs.python.org/3/c-api/long.html
+> Aktualna implementacja zachowuje tablicę obiektów typu integer dla wszystkich liczb pomiędzy -5 i 256, gdy tworzysz int z tego zasięgu, po prostu odwołujesz się do istniejącego już obiektu. A więc powinna być możliwa zmiana wartości 1. Podejrzewam, że zachowanie Pythona, w tym wypadku, nie zostało zdefiniowane. :-)
 
 ```py
 >>> id(256)
@@ -820,13 +820,13 @@ Quoting from https://docs.python.org/3/c-api/long.html
 140084850247344
 ```
 
-Here the interpreter isn't smart enough while executing `y = 257` to recognize that we've already created an integer of the value `257,` and so it goes on to create another object in the memory.
+Interpreter nie jest tutaj wystarczająco mądry aby podczas wykonywania kodu rozpoznać przy `y = 257`, że stworzyliśmy już wcześniej int o wartości `257,` i tworzy kolejny obiekt w pamięci.
 
-Similar optimization applies to other **immutable** objects like empty tuples as well. Since lists are mutable, that's why `[] is []` will return `False` and `() is ()` will return `True`. This explains our second snippet. Let's move on to the third one, 
+Podobna optymalizacja aplikuje się do innych **niemutowalnych** obiektów, w tym pustych tupli. Skoro listy są mutowalne, to `[] is []` zwróci `False` a `() is ()` zwróci `True`. To wyjaśnia nasz drugi fragment kodu. A teraz przejdźmy do trzeciego, 
 
-**Both `a` and `b` refer to the same object when initialized with same value in the same line.**
+**Oba `a` i `b` wskazują na ten sam obiekt gdy są inicjalizowane w takiej samej wartości w tym samym wierszu.**
 
-**Output**
+**Wynik**
 
 ```py
 >>> a, b = 257, 257
@@ -842,9 +842,9 @@ Similar optimization applies to other **immutable** objects like empty tuples as
 140640774013488
 ```
 
-* When a and b are set to `257` in the same line, the Python interpreter creates a new object, then references the second variable at the same time. If you do it on separate lines, it doesn't "know" that there's already `257` as an object.
+* Gdy do a i b zostaje przypisane `257` w tym samym wierszu, interpreter pythona tworzy nowy obiekt i przypisuje go do drugiej zmiennej w tym samym czasie. Jeśli zrobisz to w oddzielnych wersach, interpreter "nie wie", że jest już taki obiekt jak `257`.
 
-* It's a compiler optimization and specifically applies to the interactive environment. When you enter two lines in a live interpreter, they're compiled separately, therefore optimized separately. If you were to try this example in a `.py` file, you would not see the same behavior, because the file is compiled all at once. This optimization is not limited to integers, it works for other immutable data types like strings (check the "Strings are tricky example") and floats as well,
+* Jest to optymalizacja kompilatora i bezpośrednio odnosi się do interaktywnego środowiska. Jeśli wprowadzisz dwa wersy kodu do interpretera 'w locie', będą kompilowane oddzielnie, stąd też optymalizowane oddzielnie. Jeśli sp©óbujesz tego przykładu w pliku `.py`, nie zobaczysz tego samego zachowania ponieważ plik jest kompilowany w całości. Ta optymalizacja nie jest ograniczona do integerów i działa również dla innych typów niemutowalnych takich jak stringi albo floaty,
 
   ```py
   >>> a, b = 257.0, 257.0
@@ -852,7 +852,7 @@ Similar optimization applies to other **immutable** objects like empty tuples as
   True
   ```
 
-* Why didn't this work for Python 3.7? The abstract reason is because such compiler optimizations are implementation specific (i.e. may change with version, OS, etc). I'm still figuring out what exact implementation change cause the issue, you can check out this [issue](https://github.com/satwikkansal/wtfpython/issues/100) for updates.
+* Dlaczego nie działa to w Python 3.7? Ponieważ pewne optymalizacje kompilatora są zaimplementowane zależnie od pewnych zmiennych (np. wersji Pythona, systemu operacyjnego, itp.). Nadal dochodzę do tego jaka dokładnie implementacja zmieniła to zachowanie, co możesz śledzić w tym [issue](https://github.com/satwikkansal/wtfpython/issues/100).
 
 ---
 
