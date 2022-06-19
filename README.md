@@ -856,7 +856,7 @@ Podobna optymalizacja aplikuje się do innych **niemutowalnych** obiektów, w ty
 
 ---
 
-### ▶ `is not ...` is not `is (not ...)`
+### ▶ `is not ...` to nie `is (not ...)`
 <!-- Example ID: b26fb1ed-0c7d-4b9c-8c6d-94a58a055c0d --->
 ```py
 >>> 'something' is not None
@@ -865,10 +865,10 @@ True
 False
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- `is not` is a single binary operator, and has behavior different than using `is` and `not` separated.
-- `is not` evaluates to `False` if the variables on either side of the operator point to the same object and `True` otherwise.
+- `is not` to jednostkowy operator binarny, a jego zachowanie różni się od użycia `is` i `not` oddzielnie.
+- `is not` zwraca `False` jeśli zmienne po obu stronach operatora wskazują ten sam obiekt, a `True` w sytuacji odwrotnej.
 
 ---
 
