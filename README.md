@@ -856,7 +856,7 @@ Podobna optymalizacja aplikuje się do innych **niemutowalnych** obiektów, w ty
 
 ---
 
-### ▶ `is not ...` is not `is (not ...)`
+### ▶ `is not ...` to nie `is (not ...)`
 <!-- Example ID: b26fb1ed-0c7d-4b9c-8c6d-94a58a055c0d --->
 ```py
 >>> 'something' is not None
@@ -865,24 +865,24 @@ True
 False
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- `is not` is a single binary operator, and has behavior different than using `is` and `not` separated.
-- `is not` evaluates to `False` if the variables on either side of the operator point to the same object and `True` otherwise.
+- `is not` to jednostkowy operator binarny, a jego zachowanie różni się od użycia `is` i `not` oddzielnie.
+- `is not` zwraca `False` jeśli zmienne po obu stronach operatora wskazują ten sam obiekt, a `True` w sytuacji odwrotnej.
 
 ---
 
-### ▶ A tic-tac-toe where X wins in the first attempt!
+### ▶ Kółko i krzyżyk, ale X wygrywa w pierwszym podejściu!
 <!-- Example ID: 69329249-bdcb-424f-bd09-cca2e6705a7a --->
 
 ```py
-# Let's initialize a row
-row = [""] * 3 #row i['', '', '']
-# Let's make a board
+# Stwórzmy jeden wiersz
+row = [""] * 3 #wiersz i['', '', '']
+# A teraz całą planszę
 board = [row] * 3
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> board
@@ -896,19 +896,19 @@ board = [row] * 3
 [['X', '', ''], ['X', '', ''], ['X', '', '']]
 ```
 
-We didn't assign three `"X"`s, did we?
+Ale przecież nie przypisaliśmy trzech `"X"`, co nie?
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-When we initialize `row` variable, this visualization explains what happens in the memory
+Ta wizualizacja przedstawia co się dzieje gdy inicjalizujemy zmienną `row`
 
 ![image](/images/tic-tac-toe/after_row_initialized.png)
 
-And when the `board` is initialized by multiplying the `row`, this is what happens inside the memory (each of the elements `board[0]`, `board[1]` and `board[2]` is a reference to the same list referred by `row`)
+A gdy `board` zostaje zainicjalizowany poprzez pomnożenie zmiennej `row`, to dzieje się wewnątrz pamięci (każdy z elementów `board[0]`, `board[1]` i `board[2]` wskazuje na tę samą listę przypisaną do zmiennej `row`)
 
 ![image](/images/tic-tac-toe/after_board_initialized.png)
 
-We can avoid this scenario here by not using `row` variable to generate `board`. (Asked in [this](https://github.com/satwikkansal/wtfpython/issues/68) issue).
+Możemy uniknąć tego problemu nie używając `row` aby wygenerować `board`. (Zapytano w [tym](https://github.com/satwikkansal/wtfpython/issues/68) issue).
 
 ```py
 >>> board = [['']*3 for _ in range(3)]
