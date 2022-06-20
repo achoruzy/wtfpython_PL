@@ -919,7 +919,7 @@ Możemy uniknąć tego problemu nie używając `row` aby wygenerować `board`. (
 
 ---
 
-### ▶ The sticky output function
+### ▶ Przyczepiony wynik funkcji
 <!-- Example ID: 4dc42f77-94cb-4eb5-a120-8203d3ed7604 --->
 
 1\.
@@ -931,12 +931,12 @@ for x in range(7):
     def some_func():
         return x
     funcs.append(some_func)
-    results.append(some_func())  # note the function call here
+    results.append(some_func())  # zauważ, że wywołujemy tu funkcję
 
 funcs_results = [func() for func in funcs]
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> results
@@ -944,7 +944,7 @@ funcs_results = [func() for func in funcs]
 >>> funcs_results
 [6, 6, 6, 6, 6, 6, 6]
 ```
-Even when the values of `x` were different in every iteration prior to appending `some_func` to `funcs`, all the functions return 6.
+Pomimo, że wartości zmiennej `x` były różne w każdej iteracji przed dodaniem `some_func` do `funcs`, wszystkie funkcje zwróciły 6.
 
 2\.
 
@@ -954,11 +954,11 @@ Even when the values of `x` were different in every iteration prior to appending
 [512, 512, 512, 512, 512, 512, 512, 512, 512, 512]
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- When defining a function inside a loop that uses the loop variable in its body, the loop function's closure is bound to the variable, not its value. So all of the functions use the latest value assigned to the variable for computation.
+- Kiedy definiujemy wewnątrz pętli funkcję, która używa zmiennych pętli, obliczenie tej funkcji (stworzonej wewnątrz pętli) jest powiązane ze zmienną, a nie z jej wartością. Stąd wszystkie funkcje używają do obliczeń ostatniej wartości przypisanej do tej zmiennej.
 
-- To get the desired behavior you can pass in the loop variable as a named variable to the function. **Why this works?** Because this will define the variable again within the function's scope.
+- Aby zachowanie było zgodne z oczekiwanym, wystarczy użyć zmiennej z pętli jako parametru dla funkcji. **Dlaczego to zadziała?** Ponieważ zdefiniuje to zmnienną ponownie w zakresie funkcji.
 
     ```py
     funcs = []
@@ -968,7 +968,7 @@ Even when the values of `x` were different in every iteration prior to appending
         funcs.append(some_func)
     ```
 
-    **Output:**
+    **Wynik:**
     ```py
     >>> funcs_results = [func() for func in funcs]
     >>> funcs_results
