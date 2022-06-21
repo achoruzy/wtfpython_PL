@@ -977,7 +977,7 @@ Pomimo, że wartości zmiennej `x` były różne w każdej iteracji przed dodani
 
 ---
 
-### ▶ The chicken-egg problem *
+### ▶ Jajko czy kura *
 <!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
 1\.
 ```py
@@ -989,7 +989,7 @@ True
 True
 ```
 
-So which is the "ultimate" base class? There's more to the confusion by the way,
+Więc, która z klas jest tą "ostateczną" klasą bazową? Tu mamy więcej niezrozumiałych rzeczy,
 
 2\. 
 
@@ -1015,15 +1015,15 @@ False
 ```
 
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- `type` is a [metaclass](https://realpython.com/python-metaclasses/) in Python.
-- **Everything** is an `object` in Python, which includes classes as well as their objects (instances).
-- class `type` is the metaclass of class `object`, and every class (including `type`) has inherited directly or indirectly from `object`.
-- There is no real base class among `object` and `type`. The confusion in the above snippets is arising because we're thinking about these relationships (`issubclass` and `isinstance`) in terms of Python classes. The relationship between `object` and `type` can't be reproduced in pure python. To be more precise the following relationships can't be reproduced in pure Python,
-    + class A is an instance of class B, and class B is an instance of class A.
-    + class A is an instance of itself.
-- These relationships between `object` and `type` (both being instances of each other as well as themselves) exist in Python because of "cheating" at the implementation level.
+- `type` to  [metaklasa](https://realpython.com/python-metaclasses/) w Pythonie.
+- **Wszystko** jest `object` (obiektem) w Pythonie, włącznie z klasami i ich obiektami (instancjami).
+- klasa `type` jest metaklasą klasy `object`, a każda klasa (włączając `type`) dziedziczy bezpośrednio lub pośrednio po `object`.
+- Nie można wskazać jasno klasy bazowej pomiędzy `object` i `type`. Niejasność z powyższych fragmentów kodu bierze się z tego, że postrzegamy te relacje (`issubclass` i `isinstance`) w kontekście klas Pythona. Relacja pomiędzy `object` i `type` nie może zostać zreprodukowana w czystym pythonie. Dla doprecyzowania, następujące relacje nie mogą zostać odtworzone w czystym pythonie,
+    + klasa A jest instancją klasy B, a klasa B jest instancją klasy A.
+    + klasa A jest instancją samej siebie.
+- Relacje pomiędzy `object` i `type` (gdzie obie są instancjami tej drugiej, a przy tym też samej siebie) występuje w Pythonnie przez "oszukiwanie" na poziomie implementacji języka.
 
 ---
 
