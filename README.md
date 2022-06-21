@@ -977,7 +977,7 @@ Pomimo, że wartości zmiennej `x` były różne w każdej iteracji przed dodani
 
 ---
 
-### ▶ The chicken-egg problem *
+### ▶ Jajko czy kura *
 <!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
 1\.
 ```py
@@ -989,7 +989,7 @@ True
 True
 ```
 
-So which is the "ultimate" base class? There's more to the confusion by the way,
+Więc, która z klas jest tą "ostateczną" klasą bazową? Tu mamy więcej niezrozumiałych rzeczy,
 
 2\. 
 
@@ -1015,19 +1015,19 @@ False
 ```
 
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- `type` is a [metaclass](https://realpython.com/python-metaclasses/) in Python.
-- **Everything** is an `object` in Python, which includes classes as well as their objects (instances).
-- class `type` is the metaclass of class `object`, and every class (including `type`) has inherited directly or indirectly from `object`.
-- There is no real base class among `object` and `type`. The confusion in the above snippets is arising because we're thinking about these relationships (`issubclass` and `isinstance`) in terms of Python classes. The relationship between `object` and `type` can't be reproduced in pure python. To be more precise the following relationships can't be reproduced in pure Python,
-    + class A is an instance of class B, and class B is an instance of class A.
-    + class A is an instance of itself.
-- These relationships between `object` and `type` (both being instances of each other as well as themselves) exist in Python because of "cheating" at the implementation level.
+- `type` to  [metaklasa](https://realpython.com/python-metaclasses/) w Pythonie.
+- **Wszystko** jest `object` (obiektem) w Pythonie, włącznie z klasami i ich obiektami (instancjami).
+- klasa `type` jest metaklasą klasy `object`, a każda klasa (włączając `type`) dziedziczy bezpośrednio lub pośrednio po `object`.
+- Nie można wskazać jasno klasy bazowej pomiędzy `object` i `type`. Niejasność z powyższych fragmentów kodu bierze się z tego, że postrzegamy te relacje (`issubclass` i `isinstance`) w kontekście klas Pythona. Relacja pomiędzy `object` i `type` nie może zostać zreprodukowana w czystym pythonie. Dla doprecyzowania, następujące relacje nie mogą zostać odtworzone w czystym pythonie,
+    + klasa A jest instancją klasy B, a klasa B jest instancją klasy A.
+    + klasa A jest instancją samej siebie.
+- Relacje pomiędzy `object` i `type` (gdzie obie są instancjami tej drugiej, a przy tym też samej siebie) występuje w Pythonnie przez "oszukiwanie" na poziomie implementacji języka.
 
 ---
 
-### ▶ Subclass relationships
+### ▶ Relacje podklas
 <!-- Example ID: 9f6d8cf0-e1b5-42d0-84a0-4cfab25a0bc0 --->
 **Output:**
 ```py
@@ -1040,14 +1040,14 @@ True
 False
 ```
 
-The Subclass relationships were expected to be transitive, right? (i.e., if `A` is a subclass of `B`, and `B` is a subclass of `C`, the `A` _should_ a subclass of `C`)
+Spodziewali byśmy się, że powiązania będą przechodziły, prawda? (np., jeśli `A` jest subklasą `B`, i `B` jest subklasą `C` to `A` _powinno być_ subklasą `C`)
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Subclass relationships are not necessarily transitive in Python. Anyone is allowed to define their own, arbitrary `__subclasscheck__` in a metaclass.
-* When `issubclass(cls, Hashable)` is called, it simply looks for non-Falsey "`__hash__`" method in `cls` or anything it inherits from.
-* Since `object` is hashable, but `list` is non-hashable, it breaks the transitivity relation.
-* More detailed explanation can be found [here](https://www.naftaliharris.com/blog/python-subclass-intransitivity/).
+* Relacje subklas nie koniecznie przechodzą w Pythonie. Każdy może zdefiniować swoje własne sprawdzenie `__subclasscheck__` w metaklasie.
+* Gdy `issubclass(cls, Hashable)` jest wywołana, po prostu szuka nie-Falsującą metodę "`__hash__`" w `cls` lub w czymkolwiek z czego ona dziedziczy.
+* Jako, że `object` jest hashowalny, a `list` nie jest hashowalna, psuje to przechodzenie w relacji.
+* Bardziej dokładne wytłumaczenie znajduje się [tutaj](https://www.naftaliharris.com/blog/python-subclass-intransitivity/).
 
 ---
 
