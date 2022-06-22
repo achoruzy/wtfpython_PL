@@ -1051,7 +1051,7 @@ Spodziewali byśmy się, że powiązania będą przechodziły, prawda? (np., je�
 
 ---
 
-### ▶ All-true-ation *
+### ▶ Wszytko tru(e)je *
 
 <!-- Example ID: dfe6d845-e452-48fe-a2da-0ed3869a8042 -->
 
@@ -1069,11 +1069,11 @@ False
 True
 ```
 
-Why's this True-False alteration?
+Skąd się bierze ta różnica True-False?
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- The implementation of `all` function is equivalent to
+- Implementacja funkcji `all` jest tożsama z
 
 - ```py
   def all(iterable):
@@ -1083,9 +1083,9 @@ Why's this True-False alteration?
       return True
   ```
 
-- `all([])` returns `True` since the iterable is empty. 
-- `all([[]])` returns `False` because `not []` is `True` is equivalent to `not False` as the list inside the iterable is empty.
-- `all([[[]]])` and higher recursive variants are always `True` since `not [[]]`, `not [[[]]]`, and so on are equivalent to `not True`.
+- `all([])` zwraca `True` bo iterator jest pusty. 
+- `all([[]])` zwraca `False` ponieważ `not []` to `True` a więc jest tożsame z `not False` jako, że lista wewnątrz iteratora jest pusta.
+- `all([[[]]])` i wyższe warianty będą zawsze `True` jako, że `not [[]]`, `not [[[]]]` itd. są tożsame z `not True`.
 
 ---
 
