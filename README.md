@@ -1051,7 +1051,7 @@ Spodziewali byśmy się, że powiązania będą przechodziły, prawda? (np., je�
 
 ---
 
-### ▶ All-true-ation *
+### ▶ Wszytko tru(e)je *
 
 <!-- Example ID: dfe6d845-e452-48fe-a2da-0ed3869a8042 -->
 
@@ -1069,11 +1069,11 @@ False
 True
 ```
 
-Why's this True-False alteration?
+Skąd się bierze ta różnica True-False?
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- The implementation of `all` function is equivalent to
+- Implementacja funkcji `all` jest tożsama z
 
 - ```py
   def all(iterable):
@@ -1083,15 +1083,15 @@ Why's this True-False alteration?
       return True
   ```
 
-- `all([])` returns `True` since the iterable is empty. 
-- `all([[]])` returns `False` because `not []` is `True` is equivalent to `not False` as the list inside the iterable is empty.
-- `all([[[]]])` and higher recursive variants are always `True` since `not [[]]`, `not [[[]]]`, and so on are equivalent to `not True`.
+- `all([])` zwraca `True` bo iterator jest pusty. 
+- `all([[]])` zwraca `False` ponieważ `not []` to `True` a więc jest tożsame z `not False` jako, że lista wewnątrz iteratora jest pusta.
+- `all([[[]]])` i wyższe warianty będą zawsze `True` jako, że `not [[]]`, `not [[[]]]` itd. są tożsame z `not True`.
 
 ---
 
-### ▶ The surprising comma
+### ▶ Zaskakujący przecinek
 <!-- Example ID: 31a819c8-ed73-4dcc-84eb-91bedbb51e58 --->
-**Output (< 3.6):**
+**Wynik (< 3.6):**
 
 ```py
 >>> def f(x, y,):
@@ -1113,17 +1113,17 @@ SyntaxError: invalid syntax
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- Trailing comma is not always legal in formal parameters list of a Python function.
--  In Python, the argument list is defined partially with leading commas and partially with trailing commas. This conflict causes situations where a comma is trapped in the middle, and no rule accepts it.
--  **Note:** The trailing comma problem is [fixed in Python 3.6](https://bugs.python.org/issue9232). The remarks in [this](https://bugs.python.org/issue9232#msg248399) post discuss in brief different usages of trailing commas in Python.
+- Przecinek na końcu nie zawsze jest dozwolony w formalnej liście parametrów funkcji Pythona.
+-  W Pythonie lista argumentów jest częściowo zdefiniowana z przecinkami wiodącymi, a częściowo z przecinkami końcowymi. Ten konflikt powoduje sytuacje, w których przecinek jest uwięziony w środku i żadna reguła go nie akceptuje.
+-  **Uwaga:** Problem przecinka końcowego [naprawiono w Python 3.6](https://bugs.python.org/issue9232). Uwagi w [tym miejscu](https://bugs.python.org/issue9232#msg248399) w skrócie omawiają różne zastosowania przecinków końcowych w Pythonie.
 
 ---
 
-### ▶ Strings and the backslashes
+### ▶ Stringi i backslashe
 <!-- Example ID: 6ae622c3-6d99-4041-9b33-507bd1a4407b --->
-**Output:**
+**Wynik:**
 ```py
 >>> print("\"")
 "
@@ -1141,14 +1141,14 @@ SyntaxError: EOL while scanning string literal
 True
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- In a usual python string, the backslash is used to escape characters that may have a special meaning (like single-quote, double-quote, and the backslash itself).
+- W typowym stringu pythona, backslash używany jest jako dzika karta dla znaków o specjalnym użyciu w pythonie (jak pojedynczy cudzysłów, cudzysłów, i sam backslash).
     ```py
     >>> 'wt\"f'
     'wt"f'
     ```
-- In a raw string literal (as indicated by the prefix `r`),  the backslashes pass themselves as is along with the behavior of escaping the following character.
+- W 'surowym' (raw) stringu (na co wskazuje przedrostek `r`), backslashe przechodzą same, a przy tym są też dziką kartą dla kolejnego znaku.
     ```py
     >>> r'wt\"f' == 'wt\\"f'
     True
@@ -1160,7 +1160,7 @@ True
     >>> print(r"\\n")
     '\\\\n'
     ```
-- This means when a parser encounters a backslash in a raw string, it expects another character following it. And in our case (`print(r"\")`), the backslash escaped the trailing quote, leaving the parser without a terminating quote (hence the `SyntaxError`). That's why backslashes don't work at the end of a raw string.
+— Oznacza to, że gdy parser napotka backslash w nieprzetworzonym stringu, oczekuje kolejnego znaku następującego po nim. W naszym przypadku (`print(r"\")`), backslash był dziką kartą dla końcowego cudzysłowu, pozostawiając parser bez zamykającego cudzysłowu (stąd `SyntaxError`). Dlatego odwrotne ukośniki nie działają na końcu nieprzetworzonego stringa.
 
 ---
 
