@@ -1121,9 +1121,9 @@ SyntaxError: invalid syntax
 
 ---
 
-### ▶ Strings and the backslashes
+### ▶ Stringi i backslashe
 <!-- Example ID: 6ae622c3-6d99-4041-9b33-507bd1a4407b --->
-**Output:**
+**Wynik:**
 ```py
 >>> print("\"")
 "
@@ -1141,14 +1141,14 @@ SyntaxError: EOL while scanning string literal
 True
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-- In a usual python string, the backslash is used to escape characters that may have a special meaning (like single-quote, double-quote, and the backslash itself).
+- W typowym stringu pythona, backslash używany jest jako dzika karta dla znaków o specjalnym użyciu w pythonie (jak pojedynczy cudzysłów, cudzysłów, i sam backslash).
     ```py
     >>> 'wt\"f'
     'wt"f'
     ```
-- In a raw string literal (as indicated by the prefix `r`),  the backslashes pass themselves as is along with the behavior of escaping the following character.
+- W 'surowym' (raw) stringu (na co wskazuje przedrostek `r`), backslashe przechodzą same, a przy tym są też dziką kartą dla kolejnego znaku.
     ```py
     >>> r'wt\"f' == 'wt\\"f'
     True
@@ -1160,7 +1160,7 @@ True
     >>> print(r"\\n")
     '\\\\n'
     ```
-- This means when a parser encounters a backslash in a raw string, it expects another character following it. And in our case (`print(r"\")`), the backslash escaped the trailing quote, leaving the parser without a terminating quote (hence the `SyntaxError`). That's why backslashes don't work at the end of a raw string.
+— Oznacza to, że gdy parser napotka backslash w nieprzetworzonym stringu, oczekuje kolejnego znaku następującego po nim. W naszym przypadku (`print(r"\")`), backslash był dziką kartą dla końcowego cudzysłowu, pozostawiając parser bez zamykającego cudzysłowu (stąd `SyntaxError`). Dlatego odwrotne ukośniki nie działają na końcu nieprzetworzonego stringa.
 
 ---
 
