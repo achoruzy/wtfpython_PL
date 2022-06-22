@@ -1089,9 +1089,9 @@ Skąd się bierze ta różnica True-False?
 
 ---
 
-### ▶ The surprising comma
+### ▶ Zaskakujący przecinek
 <!-- Example ID: 31a819c8-ed73-4dcc-84eb-91bedbb51e58 --->
-**Output (< 3.6):**
+**Wynik (< 3.6):**
 
 ```py
 >>> def f(x, y,):
@@ -1113,11 +1113,11 @@ SyntaxError: invalid syntax
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- Trailing comma is not always legal in formal parameters list of a Python function.
--  In Python, the argument list is defined partially with leading commas and partially with trailing commas. This conflict causes situations where a comma is trapped in the middle, and no rule accepts it.
--  **Note:** The trailing comma problem is [fixed in Python 3.6](https://bugs.python.org/issue9232). The remarks in [this](https://bugs.python.org/issue9232#msg248399) post discuss in brief different usages of trailing commas in Python.
+- Przecinek na końcu nie zawsze jest dozwolony w formalnej liście parametrów funkcji Pythona.
+-  W Pythonie lista argumentów jest częściowo zdefiniowana z przecinkami wiodącymi, a częściowo z przecinkami końcowymi. Ten konflikt powoduje sytuacje, w których przecinek jest uwięziony w środku i żadna reguła go nie akceptuje.
+-  **Uwaga:** Problem przecinka końcowego [naprawiono w Python 3.6](https://bugs.python.org/issue9232). Uwagi w [tym miejscu](https://bugs.python.org/issue9232#msg248399) w skrócie omawiają różne zastosowania przecinków końcowych w Pythonie.
 
 ---
 
