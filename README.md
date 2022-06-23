@@ -1191,9 +1191,9 @@ SyntaxError: invalid syntax
 
 ---
 
-### ▶ Half triple-quoted strings
+### ▶ Potrójne cudzysłowy
 <!-- Example ID: c55da3e2-1034-43b9-abeb-a7a970a2ad9e --->
-**Output:**
+**Wynik:**
 ```py
 >>> print('wtfpython''')
 wtfpython
@@ -1208,15 +1208,15 @@ wtfpython
 SyntaxError: EOF while scanning triple-quoted string literal
 ```
 
-#### 💡 Explanation:
-+ Python supports implicit [string literal concatenation](https://docs.python.org/2/reference/lexical_analysis.html#string-literal-concatenation), Example,
+#### 💡 Wyjaśnienie:
++ Python wspiera wewnętrzną [konkatenacje stringów](https://docs.python.org/2/reference/lexical_analysis.html#string-literal-concatenation), Przykład,
   ```
   >>> print("wtf" "python")
   wtfpython
   >>> print("wtf" "") # or "wtf"""
   wtf
   ```
-+ `'''` and `"""` are also string delimiters in Python which causes a SyntaxError because the Python interpreter was expecting a terminating triple quote as delimiter while scanning the currently encountered triple quoted string literal.
++ `'''` i `"""` to również ograniczniki stringów w Pythonie (patrz docstring), co powoduje wystąpienie błędu składni ponieważ interpreter Pythona skanując kolejne znaki (uznając je za wnętrze stringa) oczekuje kolejnego potrójnego cudzysłowu jako ogranicznika zamykającego, którego nie znajduje.
 
 ---
 
