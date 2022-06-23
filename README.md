@@ -1160,7 +1160,7 @@ True
     >>> print(r"\\n")
     '\\\\n'
     ```
-— Oznacza to, że gdy parser napotka backslash w nieprzetworzonym stringu, oczekuje kolejnego znaku następującego po nim. W naszym przypadku (`print(r"\")`), backslash był dziką kartą dla końcowego cudzysłowu, pozostawiając parser bez zamykającego cudzysłowu (stąd `SyntaxError`). Dlatego odwrotne ukośniki nie działają na końcu nieprzetworzonego stringa.
+— Oznacza to, że gdy parser napotka backslash w surowym stringu, oczekuje kolejnego znaku następującego po nim. W naszym przypadku (`print(r"\")`), backslash był dziką kartą dla końcowego cudzysłowu, pozostawiając parser bez zamykającego cudzysłowu (stąd `SyntaxError`). Dlatego odwrotne ukośniki nie działają na końcu surowego stringa.
 
 ---
 
@@ -1171,7 +1171,7 @@ x = True
 y = False
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> not x == y
 True
@@ -1182,12 +1182,12 @@ True
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Operator precedence affects how an expression is evaluated, and `==` operator has higher precedence than `not` operator in Python.
-* So `not x == y` is equivalent to `not (x == y)` which is equivalent to `not (True == False)` finally evaluating to `True`.
-* But `x == not y` raises a `SyntaxError` because it can be thought of being equivalent to `(x == not) y` and not `x == (not y)` which you might have expected at first sight.
-* The parser expected the `not` token to be a part of the `not in` operator (because both `==` and `not in` operators have the same precedence), but after not being able to find an `in` token following the `not` token, it raises a `SyntaxError`.
+* Pierwszeństwo operatorów wpływa na to jak wyrażenie jest wykonywane, a `==` ma wyższe pierwszeństwo niż operator `not` w Pythonie.
+* Stąd `not x == y` jest tożsame z `not (x == y)`, które jest tożsame z `not (True == False)` ostatecznie zwracające `True`.
+* Jednak `x == not y` podnosi `SyntaxError` ponieważ wyrażenie jest tożsame z `(x == not) y` a nie `x == (not y)`, czego można nie przewidzieć na pierwszy rzut oka.
+* Parser spodziewa się słowa `not` jako części operatora `not in` (ponieważ oba operatory `==` i `not in` mają ten sam poziom pierwszeństwa), jednak nie mogąc znaleźć słowa `in` za słowem `not` podnosi błąd `SyntaxError`.
 
 ---
 
