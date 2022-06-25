@@ -1310,7 +1310,7 @@ I have lost faith in truth!
 
 ---
 
-### ▶ Class attributes and instance attributes
+### ▶ Atrybuty klas i atrybuty instancji
 <!-- Example ID: 6f332208-33bd-482d-8106-42863b739ed9 --->
 1\.
 ```py
@@ -1324,7 +1324,7 @@ class C(A):
     pass
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> A.x, B.x, C.x
 (1, 1, 1)
@@ -1332,7 +1332,7 @@ class C(A):
 >>> A.x, B.x, C.x
 (1, 2, 1)
 >>> A.x = 3
->>> A.x, B.x, C.x # C.x changed, but B.x didn't
+>>> A.x, B.x, C.x # C.x zmieniono ale już B.x nie
 (3, 2, 3)
 >>> a = A()
 >>> a.x, A.x
@@ -1354,7 +1354,7 @@ class SomeClass:
         self.another_list += [x]
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> some_obj = SomeClass(420)
@@ -1373,10 +1373,10 @@ True
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Class variables and variables in class instances are internally handled as dictionaries of a class object. If a variable name is not found in the dictionary of the current class, the parent classes are searched for it.
-* The `+=` operator modifies the mutable object in-place without creating a new object. So changing the attribute of one instance affects the other instances and the class attribute as well.
+* Zmienne klasowe i zmienne instancji klas są trzymane wewnętrznie w obiektach klas w słownikach (dict). Jeśli nazwa zmiennej nie zostanie znaleziona w słowniku aktualnej klasy, superklasy są przeszukiwane w następnej kolejności.
+* Operator `+=` modyfikuje mutowalny obiekt w miejscu bez tworzenia nowego obiektu. Stąd modyfikacja atrybutu instancji wpływa na inne instancje i atrybuty samej klasy.
 
 ---
 
