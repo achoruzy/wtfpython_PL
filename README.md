@@ -1220,13 +1220,13 @@ SyntaxError: EOF while scanning triple-quoted string literal
 
 ---
 
-### ▶ What's wrong with booleans?
+### ▶ Co jest nie tak z boolami?
 <!-- Example ID: 0bba5fa7-9e6d-4cd2-8b94-952d061af5dd --->
 1\.
 
 ```py
-# A simple example to count the number of booleans and
-# integers in an iterable of mixed data types.
+# Prosty przykład zliczania ilości booli i
+# integerów w iteratorze z różnymi typami danych.
 mixed_list = [False, 1.0, "some_string", 3, True, [], False]
 integers_found_so_far = 0
 booleans_found_so_far = 0
@@ -1238,7 +1238,7 @@ for item in mixed_list:
         booleans_found_so_far += 1
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> integers_found_so_far
 4
@@ -1266,7 +1266,7 @@ def tell_truth():
         print("I have lost faith in truth!")
 ```
 
-**Output (< 3.x):**
+**Wynik (< 3.x):**
 
 ```py
 >>> tell_truth()
@@ -1275,9 +1275,9 @@ I have lost faith in truth!
 
 
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* `bool` is a subclass of `int` in Python
+* `bool` jest podklasą `int` w Pythonie
     
     ```py
     >>> issubclass(bool, int)
@@ -1286,7 +1286,7 @@ I have lost faith in truth!
     False
     ```
     
-* And thus, `True` and `False` are instances of `int`
+* stąd, `True` i `False` są instancjami `int`
   ```py
   >>> isinstance(True, int)
   True
@@ -1294,7 +1294,7 @@ I have lost faith in truth!
   True
   ```
 
-* The integer value of `True` is `1` and that of `False` is `0`.
+* wartość integera `True` to `1` a `False` to `0`.
   ```py
   >>> int(True)
   1
@@ -1302,11 +1302,11 @@ I have lost faith in truth!
   0
   ```
 
-* See this StackOverflow [answer](https://stackoverflow.com/a/8169049/4354153) for the rationale behind it.
+* Zerknij na pytanie na [StackOverflow](https://stackoverflow.com/a/8169049/4354153), które to wyjaśnia.
 
-* Initially, Python used to have no `bool` type (people used 0 for false and non-zero value like 1 for true).  `True`, `False`, and a `bool` type was added in 2.x versions, but, for backward compatibility, `True` and `False` couldn't be made constants. They just were built-in variables, and it was possible to reassign them
+* Początkowo Python nie posiadał typu `bool` (używano 0 zamiast false i wartości niezerowej, przykładowo 1, dla true).  `True`, `False`, i typ `bool` zostały dodane w wersji 2.x, ale dla kompatybilności wstecznej, `True` i `False` nie mogły zostać stworzone jako stałe. Były więc wbudowanymi zmiennymi, co pozwoliło na zmiany przypisania do zmiennych.
 
-* Python 3 was backward-incompatible, the issue was finally fixed, and thus the last snippet won't work with Python 3.x!
+* Python 3 jest niekompatybilny wstecz. Problem został ostatecznie naprawiony. Stąd też ostatni fragment kodu nie zadziała w Python 3.x!
 
 ---
 
