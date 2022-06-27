@@ -1423,7 +1423,7 @@ True
 ---
 
 
-### ▶ yielding None
+### ▶ wydawanie None
 <!-- Example ID: 5a40c241-2c30-40d0-8ba9-cf7e097b3b53 --->
 ```py
 some_iterable = ('a', 'b')
@@ -1432,7 +1432,7 @@ def some_func(val):
     return "something"
 ```
 
-**Output (<= 3.7.x):**
+**Wynik (<= 3.7.x):**
 
 ```py
 >>> [x for x in some_iterable]
@@ -1447,11 +1447,11 @@ def some_func(val):
 ['a', 'something', 'b', 'something']
 ```
 
-#### 💡 Explanation:
-- This is a bug in CPython's handling of `yield` in generators and comprehensions.
-- Source and explanation can be found here: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
-- Related bug report: http://bugs.python.org/issue10544
-- Python 3.8+ no longer allows `yield` inside list comprehension and will throw a `SyntaxError`.
+#### 💡 Wyjaśnienie:
+- Jest to bug w CPython's związabt z obsługą `yield` w generatorach i składaniach (comprehensions).
+- Kod i wyjaśnienie do znalezienia tu: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
+- Powiązany raport: http://bugs.python.org/issue10544
+- Python 3.8+ nie zezwala już na użycie `yield` wewnatrz list składanych i podniesie `SyntaxError`.
 
 ---
 
