@@ -1380,7 +1380,7 @@ True
 
 ---
 
-### ▶ Non-reflexive class method *
+### ▶ Metoda klasy nie ma odbicia *
 
 <!-- Example ID: 3649771a-f733-413c-8060-3f9f167b83fd -->
 
@@ -1394,7 +1394,7 @@ class SomeClass:
                 pass
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> SomeClass.instance_method is SomeClass.instance_method
@@ -1405,9 +1405,9 @@ False
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- The reason `SomeClass.class_method is SomeClass.class_method` is `False` is due to the `@classmethod` decorator. 
+- Powodem, dla którego `SomeClass.class_method is SomeClass.class_method` jest równe `False` jest dekorator `@classmethod`.
 
   ```py
   >>> SomeClass.instance_method
@@ -1416,9 +1416,9 @@ True
   <bound method SomeClass.class_method of <class '__main__.SomeClass'>
   ```
 
-  A new bound method every time `SomeClass.class_method` is accessed.
+  Przy każdym dostępie do `SomeClass.class_method` tworzy się nowa metoda wiążąca (bound method).
 
--  `id(SomeClass.class_method) == id(SomeClass.class_method)` returned `True` because the second allocation of memory for `class_method` happened at the same location of first deallocation (See Deep Down, we're all the same example for more detailed explanation). 
+-  `id(SomeClass.class_method) == id(SomeClass.class_method)` zwraca `True` ponieważ drugie przypisanie pamięci dla `class_method` dzieje się w tym samym miejscu gdzie dealokacja pierwszej.
 
 ---
 
