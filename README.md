@@ -1448,7 +1448,7 @@ def some_func(val):
 ```
 
 #### 💡 Wyjaśnienie:
-- Jest to bug w CPython's związabt z obsługą `yield` w generatorach i składaniach (comprehensions).
+- Jest to bug w CPython's związany z obsługą `yield` w generatorach i składaniach (comprehensions).
 - Kod i wyjaśnienie do znalezienia tu: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
 - Powiązany raport: http://bugs.python.org/issue10544
 - Python 3.8+ nie zezwala już na użycie `yield` wewnatrz list składanych i podniesie `SyntaxError`.
@@ -1456,7 +1456,7 @@ def some_func(val):
 ---
 
 
-### ▶ Yielding from... return! *
+### ▶ Wydawanie z... return! *
 <!-- Example ID: 5626d8ef-8802-49c2-adbc-7cda5c550816 --->
 1\.
 
@@ -1468,14 +1468,14 @@ def some_func(x):
         yield from range(x)
 ```
 
-**Output (> 3.3):**
+**Wynik (> 3.3):**
 
 ```py
 >>> list(some_func(3))
 []
 ```
 
-Where did the `"wtf"` go? Is it due to some special effect of `yield from`? Let's validate that,
+Gdzie podziało się `"wtf"`? Czy wynika to z jakiegoś specjalnego zachowania `yield from`? Sprawdźmy to,
 
 2\.
 
@@ -1488,24 +1488,24 @@ def some_func(x):
           yield i
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> list(some_func(3))
 []
 ```
 
-The same result, this didn't work either.
+Wynik ten sam, tu też nie zadziałało.
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-+ From Python 3.3 onwards, it became possible to use `return` statement with values inside generators (See [PEP380](https://www.python.org/dev/peps/pep-0380/)). The [official docs](https://www.python.org/dev/peps/pep-0380/#enhancements-to-stopiteration) say that,
++ Od Python 3.3 w przód, możliwe stało się użycie `return` z wartością wewnątrz generatorów (Patrz [PEP380](https://www.python.org/dev/peps/pep-0380/)). I [oficjalną dokumentację](https://www.python.org/dev/peps/pep-0380/#enhancements-to-stopiteration) która mówi o tym,
 
-> "... `return expr` in a generator causes `StopIteration(expr)` to be raised upon exit from the generator."
+> "... `return expr` w generatorach powoduje podniesienie `StopIteration(expr)` przy wyjściu z generatora."
 
-+ In the case of `some_func(3)`, `StopIteration` is raised at the beginning because of `return` statement. The `StopIteration` exception is automatically caught inside the `list(...)` wrapper and the `for` loop. Therefore, the above two snippets result in an empty list.
++ W przypadku gdy `some_func(3)`, podnoszony jest`StopIteration` na samym początku z uwagi na `return`. Wyjątek `StopIteration` jest automatycznie przechwytywany wewnątrz wrapera `list(...)` i w pętli `for`. Stąd powyższe fragmenty zwracają puste listy.
 
-+ To get `["wtf"]` from the generator `some_func` we need to catch the `StopIteration` exception,
++ Aby otrzymać `["wtf"]` z generatora, `some_func` musi przechwycić wyjątek `StopIteration`,
 
   ```py
   try:
