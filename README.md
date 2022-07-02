@@ -1597,22 +1597,22 @@ True
 
 ---
 
-### ▶ Mutating the immutable!
+### ▶ Mutując niemutowalne!
 
 <!-- Example ID: 15a9e782-1695-43ea-817a-a9208f6bb33d --->
 
-This might seem trivial if you know how references work in Python.
+To może wydawać się trywialne jeśli wiesz jak działają odniesienia w Pythonie.
 
 ```py
 some_tuple = ("A", "tuple", "with", "values")
 another_tuple = ([1, 2], [3, 4], [5, 6])
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> some_tuple[2] = "change this"
 TypeError: 'tuple' object does not support item assignment
->>> another_tuple[2].append(1000) #This throws no error
+>>> another_tuple[2].append(1000) #To nie podniesie błędu
 >>> another_tuple
 ([1, 2], [3, 4], [5, 6, 1000])
 >>> another_tuple[2] += [99, 999]
@@ -1621,16 +1621,16 @@ TypeError: 'tuple' object does not support item assignment
 ([1, 2], [3, 4], [5, 6, 1000, 99, 999])
 ```
 
-But I thought tuples were immutable...
+Myślałem, że tuple są niemutowalne...
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Quoting from https://docs.python.org/2/reference/datamodel.html
+* Cytując https://docs.python.org/2/reference/datamodel.html
 
-    > Immutable sequences
-        An object of an immutable sequence type cannot change once it is created. (If the object contains references to other objects, these other objects may be mutable and may be modified; however, the collection of objects directly referenced by an immutable object cannot change.)
+    > Sekwencje niemutowalne
+        Obiekt typu sekwencji niemutowalnej nie może zostać zmieniany po stworzeniu. (Jeśli obiekt zawiera referencje do innych obiektów, te obiekty mogą być mutowalne i mogą być modyfikowane; jednak kolekcja obiektów, na którye obiekt niemutowalny bezpośrednio wskazuje nie może zostać zmodyfikowana.)
 
-* `+=` operator changes the list in-place. The item assignment doesn't work, but when the exception occurs, the item has already been changed in place.
+* `+=` zmienia listę w miejscu. Przypisanie nie działa, jednak gdy podniesiony zostaje wyjątek, obiekt został już zmieniony w miejscu.
 
 ---
 
