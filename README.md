@@ -1530,11 +1530,11 @@ Wynik ten sam, tu też nie zadziałało.
 ```py
 a = float('inf')
 b = float('nan')
-c = float('-iNf')  # These strings are case-insensitive
+c = float('-iNf')  # Wielkość znaków nie ma tu znaczenia
 d = float('nan')
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> a
@@ -1564,21 +1564,21 @@ nan
 ```py
 >>> x = float('nan')
 >>> y = x / x
->>> y is y # identity holds
+>>> y is y # identyczność jest zachowana
 True
->>> y == y # equality fails of y
+>>> y == y # równoważność nie jest zachowana
 False
->>> [y] == [y] # but the equality succeeds for the list containing y
+>>> [y] == [y] # ale już równoważność list zawierających y jest zachowana
 True
 ```
 
 
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- `'inf'` and `'nan'` are special strings (case-insensitive), which, when explicitly typecast-ed to `float` type, are used to represent mathematical "infinity" and "not a number" respectively.
+- `'inf'` i `'nan'` to specjalne stringi (nie wpływa na nie wielkość liter), które, jeśli zostaną ręcznie konwertowane na typ `float`, są używane jako matematyczna reprezentacja kolejno "nieskończoności" i "not-a-number".
 
-- Since according to IEEE standards ` NaN != NaN`, obeying this rule breaks the reflexivity assumption of a collection element in Python i.e. if `x` is a part of a collection like `list`, the implementations like comparison are based on the assumption that `x == x`.  Because of this assumption, the identity is compared first (since it's faster) while comparing two elements, and the values are compared only when the identities mismatch. The following snippet will make things clearer,
+- Zgodnie ze standardami IEEE ` NaN != NaN`, a przestrzeganie tej zasady psuje założenie odbicia kolekcji elementów w Python np. jeśli `x` jest częścią kolekcji typu `list`, implementacje takie jak porównania bazują na założeniu, że `x == x`.  Przez to założenie identyczność jest sprawdzana w pierwszej kolejności (bo jest to szybsze) podczas porównywania dwóch obiektów, a wartości są porównywane tylko wtedy gdy nie występuje identyczność. Poniższy fragment rozjaśni tę sprawę,
 
   ```py
   >>> x = float('nan')
@@ -1591,9 +1591,9 @@ True
   (False, False)
   ```
 
-  Since the identities of `x` and `y` are different, the values are considered, which are also different; hence the comparison returns `False` this time.
+  Skoro identyczność `x` i `y` nie wystąpiła, wartości są brane pod uwagę, a one również się rówżnią; stąd sprawdzenie zwraca `False`.
 
-- Interesting read: [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
+- Dla zainteresowanych: [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
 
 ---
 
