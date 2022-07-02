@@ -1530,11 +1530,11 @@ Wynik ten sam, tu też nie zadziałało.
 ```py
 a = float('inf')
 b = float('nan')
-c = float('-iNf')  # These strings are case-insensitive
+c = float('-iNf')  # Wielkość znaków nie ma tu znaczenia
 d = float('nan')
 ```
 
-**Output:**
+**Wynik:**
 
 ```py
 >>> a
@@ -1564,21 +1564,21 @@ nan
 ```py
 >>> x = float('nan')
 >>> y = x / x
->>> y is y # identity holds
+>>> y is y # identyczność jest zachowana
 True
->>> y == y # equality fails of y
+>>> y == y # równoważność nie jest zachowana
 False
->>> [y] == [y] # but the equality succeeds for the list containing y
+>>> [y] == [y] # ale już równoważność list zawierających y jest zachowana
 True
 ```
 
 
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- `'inf'` and `'nan'` are special strings (case-insensitive), which, when explicitly typecast-ed to `float` type, are used to represent mathematical "infinity" and "not a number" respectively.
+- `'inf'` i `'nan'` to specjalne stringi (nie wpływa na nie wielkość liter), które, jeśli zostaną ręcznie konwertowane na typ `float`, są używane jako matematyczna reprezentacja kolejno "nieskończoności" i "not-a-number".
 
-- Since according to IEEE standards ` NaN != NaN`, obeying this rule breaks the reflexivity assumption of a collection element in Python i.e. if `x` is a part of a collection like `list`, the implementations like comparison are based on the assumption that `x == x`.  Because of this assumption, the identity is compared first (since it's faster) while comparing two elements, and the values are compared only when the identities mismatch. The following snippet will make things clearer,
+- Zgodnie ze standardami IEEE ` NaN != NaN`, a przestrzeganie tej zasady psuje założenie odbicia kolekcji elementów w Python np. jeśli `x` jest częścią kolekcji typu `list`, implementacje takie jak porównania bazują na założeniu, że `x == x`.  Przez to założenie identyczność jest sprawdzana w pierwszej kolejności (bo jest to szybsze) podczas porównywania dwóch obiektów, a wartości są porównywane tylko wtedy gdy nie występuje identyczność. Poniższy fragment rozjaśni tę sprawę,
 
   ```py
   >>> x = float('nan')
@@ -1591,28 +1591,28 @@ True
   (False, False)
   ```
 
-  Since the identities of `x` and `y` are different, the values are considered, which are also different; hence the comparison returns `False` this time.
+  Skoro identyczność `x` i `y` nie wystąpiła, wartości są brane pod uwagę, a one również się rówżnią; stąd sprawdzenie zwraca `False`.
 
-- Interesting read: [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
+- Dla zainteresowanych: [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
 
 ---
 
-### ▶ Mutating the immutable!
+### ▶ Mutując niemutowalne!
 
 <!-- Example ID: 15a9e782-1695-43ea-817a-a9208f6bb33d --->
 
-This might seem trivial if you know how references work in Python.
+To może wydawać się trywialne jeśli wiesz jak działają odniesienia w Pythonie.
 
 ```py
 some_tuple = ("A", "tuple", "with", "values")
 another_tuple = ([1, 2], [3, 4], [5, 6])
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> some_tuple[2] = "change this"
 TypeError: 'tuple' object does not support item assignment
->>> another_tuple[2].append(1000) #This throws no error
+>>> another_tuple[2].append(1000) #To nie podniesie błędu
 >>> another_tuple
 ([1, 2], [3, 4], [5, 6, 1000])
 >>> another_tuple[2] += [99, 999]
@@ -1621,16 +1621,16 @@ TypeError: 'tuple' object does not support item assignment
 ([1, 2], [3, 4], [5, 6, 1000, 99, 999])
 ```
 
-But I thought tuples were immutable...
+Myślałem, że tuple są niemutowalne...
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Quoting from https://docs.python.org/2/reference/datamodel.html
+* Cytując https://docs.python.org/2/reference/datamodel.html
 
-    > Immutable sequences
-        An object of an immutable sequence type cannot change once it is created. (If the object contains references to other objects, these other objects may be mutable and may be modified; however, the collection of objects directly referenced by an immutable object cannot change.)
+    > Sekwencje niemutowalne
+        Obiekt typu sekwencji niemutowalnej nie może zostać zmieniany po stworzeniu. (Jeśli obiekt zawiera referencje do innych obiektów, te obiekty mogą być mutowalne i mogą być modyfikowane; jednak kolekcja obiektów, na którye obiekt niemutowalny bezpośrednio wskazuje nie może zostać zmodyfikowana.)
 
-* `+=` operator changes the list in-place. The item assignment doesn't work, but when the exception occurs, the item has already been changed in place.
+* `+=` zmienia listę w miejscu. Przypisanie nie działa, jednak gdy podniesiony zostaje wyjątek, obiekt został już zmieniony w miejscu.
 
 ---
 
