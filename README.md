@@ -1634,7 +1634,7 @@ Myślałem, że tuple są niemutowalne...
 
 ---
 
-### ▶ The disappearing variable from outer scope
+### ▶ Znikające zmienne z innych zakresów
 <!-- Example ID: 7f1e71b6-cb3e-44fb-aa47-87ef1b7decc8 --->
 
 ```py
@@ -1645,30 +1645,30 @@ except Exception as e:
     pass
 ```
 
-**Output (Python 2.x):**
+**Wynik (Python 2.x):**
 ```py
 >>> print(e)
 # prints nothing
 ```
 
-**Output (Python 3.x):**
+**Wynik (Python 3.x):**
 ```py
 >>> print(e)
 NameError: name 'e' is not defined
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Source: https://docs.python.org/3/reference/compound_stmts.html#except
+* Źródło: https://docs.python.org/3/reference/compound_stmts.html#except
 
-  When an exception has been assigned using `as` target, it is cleared at the end of the `except` clause. This is as if
+  Gdy wyjątek jest przypisywany z użyciem `as` do zmiennej, jest usuwany na końcu sekcji `except`. To tak jakby
 
   ```py
   except E as N:
       foo
   ```
 
-  was translated into
+  zostało użyte w sposób poniżej
 
   ```py
   except E as N:
@@ -1678,9 +1678,9 @@ NameError: name 'e' is not defined
           del N
   ```
 
-  This means the exception must be assigned to a different name to be able to refer to it after the except clause. Exceptions are cleared because, with the traceback attached to them, they form a reference cycle with the stack frame, keeping all locals in that frame alive until the next garbage collection occurs.
+  To znaczy, że wyjątek musi być przypisany do innej zmiennej aby móc być wywołany po sekcji `except`. Wyjątki są usuwane ponieważ jeśli są śledzone, tworzą pętle referencji na stosie ramowym, przechowyjąc wszystkie zmienne lokalne w tym stosie póki nie zadziała garbage collector.
 
-* The clauses are not scoped in Python. Everything in the example is present in the same scope, and the variable `e` got removed due to the execution of the `except` clause. The same is not the case with functions that have their separate inner-scopes. The example below illustrates this:
+* Sekcje nie są objęte zakresem w Pythonie. Wszystko w przykładzie znajduje się w tym samym zakresie, a zmienna `e` została usunięta z powodu wykonania sekcji `except`. To samo dotyczy funkcji, które mają swoje oddzielne wewnętrzne zakresy. Poniższy przykład to przedstawia:
 
      ```py
      def f(x):
@@ -1691,7 +1691,7 @@ NameError: name 'e' is not defined
      y = [5, 4, 3]
      ```
 
-     **Output:**
+     **Wynik:**
      ```py
      >>>f(x)
      UnboundLocalError: local variable 'x' referenced before assignment
@@ -1703,9 +1703,9 @@ NameError: name 'e' is not defined
      [5, 4, 3]
      ```
 
-* In Python 2.x, the variable name `e` gets assigned to `Exception()` instance, so when you try to print, it prints nothing.
+* W Python 2.x, zmienna `e` zostaje przypisana do instancji `Exception()`, więc przy próbie printowania nie printuje się.
 
-    **Output (Python 2.x):**
+    **Wynik (Python 2.x):**
     ```py
     >>> e
     Exception()
