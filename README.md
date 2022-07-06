@@ -1634,7 +1634,7 @@ Myślałem, że tuple są niemutowalne...
 
 ---
 
-### ▶ The disappearing variable from outer scope
+### ▶ Znikające zmienne z innych zakresów
 <!-- Example ID: 7f1e71b6-cb3e-44fb-aa47-87ef1b7decc8 --->
 
 ```py
@@ -1645,30 +1645,30 @@ except Exception as e:
     pass
 ```
 
-**Output (Python 2.x):**
+**Wynik (Python 2.x):**
 ```py
 >>> print(e)
 # prints nothing
 ```
 
-**Output (Python 3.x):**
+**Wynik (Python 3.x):**
 ```py
 >>> print(e)
 NameError: name 'e' is not defined
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Source: https://docs.python.org/3/reference/compound_stmts.html#except
+* Źródło: https://docs.python.org/3/reference/compound_stmts.html#except
 
-  When an exception has been assigned using `as` target, it is cleared at the end of the `except` clause. This is as if
+  Gdy wyjątek jest przypisywany z użyciem `as` do zmiennej, jest usuwany na końcu sekcji `except`. To tak jakby
 
   ```py
   except E as N:
       foo
   ```
 
-  was translated into
+  zostało użyte w sposób poniżej
 
   ```py
   except E as N:
@@ -1678,9 +1678,9 @@ NameError: name 'e' is not defined
           del N
   ```
 
-  This means the exception must be assigned to a different name to be able to refer to it after the except clause. Exceptions are cleared because, with the traceback attached to them, they form a reference cycle with the stack frame, keeping all locals in that frame alive until the next garbage collection occurs.
+  To znaczy, że wyjątek musi być przypisany do innej zmiennej aby móc być wywołany po sekcji `except`. Wyjątki są usuwane ponieważ jeśli są śledzone, tworzą pętle referencji na stosie ramowym, przechowyjąc wszystkie zmienne lokalne w tym stosie póki nie zadziała garbage collector.
 
-* The clauses are not scoped in Python. Everything in the example is present in the same scope, and the variable `e` got removed due to the execution of the `except` clause. The same is not the case with functions that have their separate inner-scopes. The example below illustrates this:
+* Sekcje nie są objęte zakresem w Pythonie. Wszystko w przykładzie znajduje się w tym samym zakresie, a zmienna `e` została usunięta z powodu wykonania sekcji `except`. To samo dotyczy funkcji, które mają swoje oddzielne wewnętrzne zakresy. Poniższy przykład to przedstawia:
 
      ```py
      def f(x):
@@ -1691,7 +1691,7 @@ NameError: name 'e' is not defined
      y = [5, 4, 3]
      ```
 
-     **Output:**
+     **Wynik:**
      ```py
      >>>f(x)
      UnboundLocalError: local variable 'x' referenced before assignment
@@ -1703,9 +1703,9 @@ NameError: name 'e' is not defined
      [5, 4, 3]
      ```
 
-* In Python 2.x, the variable name `e` gets assigned to `Exception()` instance, so when you try to print, it prints nothing.
+* W Python 2.x, zmienna `e` zostaje przypisana do instancji `Exception()`, więc przy próbie printowania nie printuje się.
 
-    **Output (Python 2.x):**
+    **Wynik (Python 2.x):**
     ```py
     >>> e
     Exception()
@@ -1716,7 +1716,7 @@ NameError: name 'e' is not defined
 ---
 
 
-### ▶ The mysterious key type conversion
+### ▶ Tajemnicza konwersja typów kluczy
 <!-- Example ID: 00f42dd0-b9ef-408d-9e39-1bc209ce3f36 --->
 ```py
 class SomeClass(str):
@@ -1725,24 +1725,24 @@ class SomeClass(str):
 some_dict = {'s': 42}
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> type(list(some_dict.keys())[0])
 str
 >>> s = SomeClass('s')
 >>> some_dict[s] = 40
->>> some_dict # expected: Two different keys-value pairs
+>>> some_dict # spodziewane: dwie różne pary klucz-wartość
 {'s': 40}
 >>> type(list(some_dict.keys())[0])
 str
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Both the object `s` and the string `"s"` hash to the same value because `SomeClass` inherits the `__hash__` method of `str` class.
-* `SomeClass("s") == "s"` evaluates to `True` because `SomeClass` also inherits `__eq__` method from `str` class.
-* Since both the objects hash to the same value and are equal, they are represented by the same key in the dictionary.
-* For the desired behavior, we can redefine the `__eq__` method in `SomeClass`
+* Oba obiekty `s` i string `"s"` są hashowane do tej samej wartości ponieważ `SomeClass` dziedziczy metodę `__hash__` po klasie `str`.
+* `SomeClass("s") == "s"` zwraca `True` ponieważ `SomeClass` dziedziczy również metodę `__eq__` z klasy `str`.
+* Jako, że oba obiekty mają ten sam hash i są równe, są reprezentowane przez ten sam klucz w słowniku.
+* Dla wymaganego działania możemy sami zdefiniować metodę `__eq__` w `SomeClass`
   ```py
   class SomeClass(str):
     def __eq__(self, other):
@@ -1752,14 +1752,14 @@ str
             and super().__eq__(other)
         )
 
-    # When we define a custom __eq__, Python stops automatically inheriting the
-    # __hash__ method, so we need to define it as well
+    # Kiedy definiujemy własną metodę __eq__, Python automatycznie przestaje dziedziczyć
+    # metodę __hash__ , więc musimy ją również zdefiniować
     __hash__ = str.__hash__
 
   some_dict = {'s':42}
   ```
 
-  **Output:**
+  **Wynik:**
   ```py
   >>> s = SomeClass('s')
   >>> some_dict[s] = 40
