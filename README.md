@@ -1830,9 +1830,9 @@ a, b = a[b] = {}, 5
 ---
 ---
 
-## Section: Slippery Slopes
+## Sekcja: Równia pochyła
 
-### ▶ Modifying a dictionary while iterating over it
+### ▶ Edytując słownik podczas iterowania na nim
 <!-- Example ID: b4e5cdfb-c3a8-4112-bd38-e2356d801c41 --->
 ```py
 x = {0: None}
@@ -1843,7 +1843,7 @@ for i in x:
     print(i)
 ```
 
-**Output (Python 2.7- Python 3.5):**
+**Wynik (Python 2.7- Python 3.5):**
 
 ```
 0
@@ -1856,15 +1856,15 @@ for i in x:
 7
 ```
 
-Yes, it runs for exactly **eight** times and stops.
+Tak, działa przez **osiem** pętli i się zatrzymuje.
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* Iteration over a dictionary that you edit at the same time is not supported.
-* It runs eight times because that's the point at which the dictionary resizes to hold more keys (we have eight deletion entries, so a resize is needed). This is actually an implementation detail.
-* How deleted keys are handled and when the resize occurs might be different for different Python implementations.
-* So for Python versions other than Python 2.7 - Python 3.5, the count might be different from 8 (but whatever the count is, it's going to be the same every time you run it). You can find some discussion around this [here](https://github.com/satwikkansal/wtfpython/issues/53) or in [this](https://stackoverflow.com/questions/44763802/bug-in-python-dict) StackOverflow thread.
-* Python 3.8 onwards, you'll see `RuntimeError: dictionary keys changed during iteration` exception if you try to do this.
+* Iteracje na słowniku, który edytujesz podczas iteracji, nie są wspierane
+* Iteruje 8 razy ponieważ jest to wielkość przy której słownik zwiększa użytą ilość pamięci aby móc mieć więcej kluczy (mamy 8 usinięć, więc zmiana wielkości jest potrzebna). Jest to właściwie detal implementacyjny.
+* To jak obsługiwane są usunięte klucze i kiedy wystąpi zmiana wielkości pamięci mo że być różne dla różnych implementacji Pythona.
+* Dla wersji Pythona innych niż 2.7 do 3.5, zliczanie może być inne niż do 8 (jednak jakiekolwiek by nie było, będzie takie same za każdym uruchomieniem). Możesz znaleźć więcej informacji na ten temat [tutaj](https://github.com/satwikkansal/wtfpython/issues/53) lub [w tym wątku](https://stackoverflow.com/questions/44763802/bug-in-python-dict) StackOverflow.
+* W Python 3.8 i kolejnych, napotkasz wyjątek `RuntimeError: dictionary keys changed during iteration` przy próbie wykonania tego kodu.
 
 ---
 
