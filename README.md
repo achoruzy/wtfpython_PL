@@ -1868,7 +1868,7 @@ Tak, działa przez **osiem** pętli i się zatrzymuje.
 
 ---
 
-### ▶ Stubborn `del` operation
+### ▶ Uparty `del`
 <!-- Example ID: 777ed4fd-3a2d-466f-95e7-c4058e61d78e --->
 <!-- read-only -->
 
@@ -1878,38 +1878,38 @@ class SomeClass:
         print("Deleted!")
 ```
 
-**Output:**
+**Wynik:**
 1\.
 ```py
 >>> x = SomeClass()
 >>> y = x
->>> del x # this should print "Deleted!"
+>>> del x # powinno wyprintować "Deleted!"
 >>> del y
 Deleted!
 ```
 
-Phew, deleted at last. You might have guessed what saved from `__del__` being called in our first attempt to delete `x`. Let's add more twists to the example.
+W końcu usunięte. Możliwe, że wywnioskowałeś co zablokowało wywołanie `__del__` prtzypierwszej próbie usunięcia `x`. Dodajmy jeszcze plot twist.
 
 2\.
 ```py
 >>> x = SomeClass()
 >>> y = x
 >>> del x
->>> y # check if y exists
+>>> y # sprawdźmy czy y istnieje
 <__main__.SomeClass instance at 0x7f98a1a67fc8>
->>> del y # Like previously, this should print "Deleted!"
->>> globals() # oh, it didn't. Let's check all our global variables and confirm
+>>> del y # Jak poprzednio powinno wyprintować "Deleted!"
+>>> globals() # ale tego nie zrobiło. Sprawdźmy nasze zmienne globalne dla potwierdzenia
 Deleted!
 {'__builtins__': <module '__builtin__' (built-in)>, 'SomeClass': <class __main__.SomeClass at 0x7f98a1a5f668>, '__package__': None, '__name__': '__main__', '__doc__': None}
 ```
 
-Okay, now it's deleted :confused:
+OK, teraz jest usunięte :confused:
 
-#### 💡 Explanation:
-+ `del x` doesn’t directly call `x.__del__()`.
-+ Whenever `del x` is encountered, Python decrements the reference count for `x` by one, and `x.__del__()` when x’s reference count reaches zero.
-+ In the second output snippet, `y.__del__()` was not called because the previous statement (`>>> y`) in the interactive interpreter created another reference to the same object, thus preventing the reference count from reaching zero when `del y` was encountered.
-+ Calling `globals` caused the existing reference to be destroyed, and hence we can see "Deleted!" being printed (finally!).
+#### 💡 Wyjaśnienie:
++ `del x` nie wywołuje bezpośrednio `x.__del__()`.
++ Za każdym razem gdy `del x` jest napotykane, Python zmniejsza ilość istniejących `x` o jeden, i `x.__del__()` gdy referencyjne podliczenie x’ów dotarło do zera.
++ W drugim wyniku, `y.__del__()` nie został wywołany przez pojawienie się poprzedniego wyrażenia (`>>> y`) w interpreterze interaktywnym, który stworzył kolejną referencję tego obiektu, stąd podliczenie referencji nie dotarło do zera gdy `del y` zostało wywołane.
++ Wywołanie `globals` sprawiło, że istniejące referencje zostały zniszczone, i dzięki temu widzimy "Deleted!" wyprintowane (w końcu!).
 
 ---
 
