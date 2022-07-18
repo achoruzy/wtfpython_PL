@@ -1913,7 +1913,7 @@ OK, teraz jest usunięte :confused:
 
 ---
 
-### ▶ The out of scope variable
+### ▶ Zmienna spoza zakresu
 <!-- Example ID: 75c03015-7be9-4289-9e22-4f5fdda056f7 --->
 ```py
 a = 1
@@ -1925,7 +1925,7 @@ def another_func():
     return a
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> some_func()
 1
@@ -1933,10 +1933,10 @@ def another_func():
 UnboundLocalError: local variable 'a' referenced before assignment
 ```
 
-#### 💡 Explanation:
-* When you make an assignment to a variable in scope, it becomes local to that scope. So `a` becomes local to the scope of `another_func`,  but it has not been initialized previously in the same scope, which throws an error.
-* Read [this](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html) short but an awesome guide to learn more about how namespaces and scope resolution works in Python.
-* To modify the outer scope variable `a` in `another_func`, use `global` keyword.
+#### 💡 Wyjaśnienie:
+* Gdy tworzysz przypisanie do zmiennej w zakresie funkcji, zostaje ona zmienną lokalną. Więc `a` staje się lokalne w zakresie `another_func`,  jednak nie została wcześniej zainicjalizowana w tym zakresie, przez co otrzymujemy błąd.
+* Przeczytaj [ten](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html) świetny, krótki poradnik aby dowiedzieć się więcej o tym jak działają zakresy i przestrzenie zmiennych w pythonie.
+* Aby dokonać zmiany zmiennej `a` z zewnętrznego zakresu wewnątrz `another_func`, użyj komendy `global`.
   ```py
   def another_func()
       global a
@@ -1944,7 +1944,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
       return a
   ```
 
-  **Output:**
+  **Wynik:**
   ```py
   >>> another_func()
   2
@@ -1952,7 +1952,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
 
 ---
 
-### ▶ Deleting a list item while iterating
+### ▶ Usuwanie listy podczas iteracji
 <!-- Example ID: 4cc52d4e-d42b-4e09-b25f-fbf5699b7d4e --->
 ```py
 list_1 = [1, 2, 3, 4]
@@ -1973,7 +1973,7 @@ for idx, item in enumerate(list_4):
     list_4.pop(idx)
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> list_1
 [1, 2, 3, 4]
@@ -1985,30 +1985,30 @@ for idx, item in enumerate(list_4):
 [2, 4]
 ```
 
-Can you guess why the output is `[2, 4]`?
+Cgadniesz skąd wzięło się `[2, 4]`?
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-* It's never a good idea to change the object you're iterating over. The correct way to do so is to iterate over a copy of the object instead, and `list_3[:]` does just that.
+* Nie powinno się zmieniać obiektów, po których się iteruje w trakcie iteracji. Poprawne będzie iterowanie po kopii, a `list_3[:]` również wystarczy.
 
      ```py
      >>> some_list = [1, 2, 3, 4]
      >>> id(some_list)
      139798789457608
-     >>> id(some_list[:]) # Notice that python creates new object for sliced list.
+     >>> id(some_list[:]) # Zwróć uwagę, że python tworzy nowy obiekt w takim wypadku.
      139798779601192
      ```
 
-**Difference between `del`, `remove`, and `pop`:**
-* `del var_name` just removes the binding of the `var_name` from the local or global namespace (That's why the `list_1` is unaffected).
-* `remove` removes the first matching value, not a specific index, raises `ValueError` if the value is not found.
-* `pop` removes the element at a specific index and returns it, raises `IndexError` if an invalid index is specified.
+**Różnica pomiędzy `del`, `remove`, i `pop`:**
+* `del var_name` po prostu usuwa przypisanie zmiennej `var_name` z lokalnej lub globalnej przestrzeni zmiennych (Dlatego `list_1` nie zmieniła się).
+* `remove` usuwa pierwszą pasującą wartość, a nie specyficzny indeks, i podnosi `ValueError` jeśli wartość nie jest odnaleziona.
+* `pop` usuwa element z podanym indeksem i zwraca go, podnosi też `IndexError` jeśli podano niepoprawny indeks.
 
-**Why the output is `[2, 4]`?**
-- The list iteration is done index by index, and when we remove `1` from `list_2` or `list_4`, the contents of the lists are now `[2, 3, 4]`. The remaining elements are shifted down, i.e., `2` is at index 0, and `3` is at index 1. Since the next iteration is going to look at index 1 (which is the `3`), the `2` gets skipped entirely. A similar thing will happen with every alternate element in the list sequence.
+**Dlaczego wynik jest równy `[2, 4]`?**
+- Iteracja po liście jest wykonywana indeks po indeksie, a gdy usuniemy `1` z `list_2` lub `list_4`, zawartość listy staje się równa `[2, 3, 4]`. Pozostałe elementy zostają przesunięte w dół, np `2` do indeksu 0, a `3` do indeksu 1. Jako, że kolejna iteracja będzie szukała indeksu 1 (czyli wartości `3`),  `2` zostaje całkowicie pominięta. Podobna rzecz stanie sie z każdym zmienionym elementem w liście.
 
-* Refer to this StackOverflow [thread](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it) explaining the example
-* See also this nice StackOverflow [thread](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items) for a similar example related to dictionaries in Python.
+* Na StackOverflow [wątek](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it) wyjaśnia przykład
+* Zerknij również na StackOverflow [wątek](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items) przedstawiający podobny przykład dla słowników.
 
 ---
 
