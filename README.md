@@ -2126,7 +2126,7 @@ print(x, ': x in global')
 
 ---
 
-### ▶ Beware of default mutable arguments!
+### ▶ Uważaj na domyślne zmienne argumenty!
 <!-- Example ID: 7d42dade-e20d-4a7b-9ed7-16fb58505fe9 --->
 
 ```py
@@ -2135,7 +2135,7 @@ def some_func(default_arg=[]):
     return default_arg
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> some_func()
 ['some_string']
@@ -2147,9 +2147,9 @@ def some_func(default_arg=[]):
 ['some_string', 'some_string', 'some_string']
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- The default mutable arguments of functions in Python aren't really initialized every time you call the function. Instead, the recently assigned value to them is used as the default value. When we explicitly passed `[]` to `some_func` as the argument, the default value of the `default_arg` variable was not used, so the function returned as expected.
+- Domyślne zmienne argumenty funkcji w Pythonie tak naprawdę nie są inicjowane za każdym razem, gdy wywołujesz funkcję. Zamiast tego ostatnio przypisana do nich wartość jest używana jako wartość domyślna. Kiedy jawnie przekazaliśmy `[]` do `some_func` jako argumentu, domyślna wartość zmiennej `default_arg` nie została użyta, więc funkcja zwróciła to co zgodne z oczekiwaniami.
 
     ```py
     def some_func(default_arg=[]):
@@ -2157,9 +2157,9 @@ def some_func(default_arg=[]):
         return default_arg
     ```
 
-    **Output:**
+    **Wynik:**
     ```py
-    >>> some_func.__defaults__ #This will show the default argument values for the function
+    >>> some_func.__defaults__ #Spowoduje to wyświetlenie domyślnych wartości argumentów funkcji
     ([],)
     >>> some_func()
     >>> some_func.__defaults__
@@ -2172,7 +2172,7 @@ def some_func(default_arg=[]):
     (['some_string', 'some_string'],)
     ```
 
-- A common practice to avoid bugs due to mutable arguments is to assign `None` as the default value and later check if any value is passed to the function corresponding to that argument. Example:
+- Powszechną praktyką unikania błędów spowodowanych mutowalnymi argumentami jest przypisanie `None` jako wartości domyślnej, a następnie sprawdzenie, czy jakakolwiek wartość jest przekazywana do funkcji odpowiadającej temu argumentowi. Przykład:
 
     ```py
     def some_func(default_arg=None):
