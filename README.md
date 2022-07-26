@@ -2062,7 +2062,7 @@ Gdzie podziała się `3` z listy `numbers`?
 
 ---
 
-### ▶ Loop variables leaking out!
+### ▶ Wyciek zmiennych pętli!
 <!-- Example ID: ccec7bf6-7679-4963-907a-1cd8587be9ea --->
 1\.
 ```py
@@ -2072,17 +2072,17 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**Wynik:**
 ```py
 6 : for x inside loop
 6 : x in global
 ```
 
-But `x` was never defined outside the scope of for loop...
+Ale `x` nigdy nie zostało zdefiniowane poza zakresem pętli for...
 
 2\.
 ```py
-# This time let's initialize x first
+# Tym razem najpierw zdefiniujmy x
 x = -1
 for x in range(7):
     if x == 6:
@@ -2090,7 +2090,7 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**Wynik:**
 ```py
 6 : for x inside loop
 6 : x in global
@@ -2098,7 +2098,7 @@ print(x, ': x in global')
 
 3\.
 
-**Output (Python 2.x):**
+**Wynik (Python 2.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2107,7 +2107,7 @@ print(x, ': x in global')
 4
 ```
 
-**Output (Python 3.x):**
+**Wynik (Python 3.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2116,13 +2116,13 @@ print(x, ': x in global')
 1
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- In Python, for-loops use the scope they exist in and leave their defined loop-variable behind. This also applies if we explicitly defined the for-loop variable in the global namespace before. In this case, it will rebind the existing variable.
+- W Pythonie pętle for używają zakresu, w którym istnieją, i pozostawiają za sobą zdefiniowaną zmienną pętli. Dotyczy to również sytuacji, gdy wcześniej jawnie zdefiniowaliśmy zmienną for-loop w globalnej przestrzeni nazw. W takim przypadku ponownie powiąże istniejącą zmienną.
 
-- The differences in the output of Python 2.x and Python 3.x interpreters for list comprehension example can be explained by following change documented in [What’s New In Python 3.0](https://docs.python.org/3/whatsnew/3.0.html) changelog:
+- Różnice w wynikach interpreterów Python 2.x i Python 3.x dla przykładu ze zrozumieniem list można wyjaśnić, postępując zgodnie ze zmianą udokumentowaną w [Co nowego w Pythonie 3.0](https://docs.python.org/3/whatsnew/3.0.html) dziennik zmian:
 
-    > "List comprehensions no longer support the syntactic form `[... for var in item1, item2, ...]`. Use `[... for var in (item1, item2, ...)]` instead. Also, note that list comprehensions have different semantics: they are closer to syntactic sugar for a generator expression inside a `list()` constructor, and in particular, the loop control variables are no longer leaked into the surrounding scope."
+    > "Listy składane nie obsługują już formy składniowej `[... for var in item1, item2, ...]`. Zamiast tego użyj `[... for var in (item1, item2,...)]`. Zauważ też, że listy składane mają inną semantykę: są bliższe specyfice składni dla wyrażenia generatora wewnątrz konstruktora `list()`, a w szczególności zmienne sterujące pętli nie wyciekają już do zewnętrznego zasięgu."
 
 ---
 
