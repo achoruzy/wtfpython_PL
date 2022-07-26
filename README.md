@@ -2013,7 +2013,7 @@ Cgadniesz skąd wzięło się `[2, 4]`?
 ---
 
 
-### ▶ Lossy zip of iterators *
+### ▶ Stratny zip iteratorów *
 <!-- Example ID: c28ed154-e59f-4070-8eb6-8967a4acac6d --->
 
 ```py
@@ -2026,15 +2026,15 @@ Cgadniesz skąd wzięło się `[2, 4]`?
 >>> numbers_iter = iter(numbers)
 >>> list(zip(numbers_iter, first_three)) 
 [(0, 0), (1, 1), (2, 2)]
-# so far so good, let's zip the remaining
+# a teraz zipujemy pozostałe
 >>> list(zip(numbers_iter, remaining))
 [(4, 3), (5, 4), (6, 5)]
 ```
-Where did element `3` go from the `numbers` list?
+Gdzie podziała się `3` z listy `numbers`?
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- From Python [docs](https://docs.python.org/3.3/library/functions.html#zip), here's an approximate implementation of zip function,
+- Z dokumentacji [pythona](https://docs.python.org/3.3/library/functions.html#zip), tak prezentuje się przybliżona implementacja funkcji zip,
     ```py
     def zip(*iterables):
         sentinel = object()
@@ -2047,9 +2047,9 @@ Where did element `3` go from the `numbers` list?
                 result.append(elem)
             yield tuple(result)
     ```
-- So the function takes in arbitrary number of itreable objects, adds each of their items to the `result` list by calling the `next` function on them, and stops whenever any of the iterable is exhausted. 
-- The caveat here is when any iterable is exhausted, the existing elements in the `result` list are discarded. That's what happened with `3` in the `numbers_iter`.
-- The correct way to do the above using `zip` would be,
+- Tak więc funkcja pobiera dowolną liczbę iterowalnych obiektów, dodaje każdy z ich elementów do listy `result` wywołując na nich funkcję `next` i zatrzymuje się, gdy którykolwiek z iterowalnych elementów zostanie wyczerpany.
+- Zastrzeżenie polega na tym, że gdy jakikolwiek element iteracyjny zostanie wyczerpany, istniejące elementy na liście `result` są odrzucane. Tak stało się z `3` w `numbers_iter`.
+- Prawidłowym sposobem wykonania powyższego przy użyciu `zip` byłoby,
     ```py
     >>> numbers = list(range(7))
     >>> numbers_iter = iter(numbers)
@@ -2058,7 +2058,7 @@ Where did element `3` go from the `numbers` list?
     >>> list(zip(remaining, numbers_iter))
     [(3, 3), (4, 4), (5, 5), (6, 6)]
     ```
-    The first argument of zip should be the one with fewest elements.
+    Pierwszym argumentem zip powinien być ten z najmniejszą liczbą elementów.
 
 ---
 
