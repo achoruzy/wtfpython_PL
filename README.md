@@ -2013,7 +2013,7 @@ Cgadniesz skąd wzięło się `[2, 4]`?
 ---
 
 
-### ▶ Lossy zip of iterators *
+### ▶ Stratny zip iteratorów *
 <!-- Example ID: c28ed154-e59f-4070-8eb6-8967a4acac6d --->
 
 ```py
@@ -2026,15 +2026,15 @@ Cgadniesz skąd wzięło się `[2, 4]`?
 >>> numbers_iter = iter(numbers)
 >>> list(zip(numbers_iter, first_three)) 
 [(0, 0), (1, 1), (2, 2)]
-# so far so good, let's zip the remaining
+# a teraz zipujemy pozostałe
 >>> list(zip(numbers_iter, remaining))
 [(4, 3), (5, 4), (6, 5)]
 ```
-Where did element `3` go from the `numbers` list?
+Gdzie podziała się `3` z listy `numbers`?
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- From Python [docs](https://docs.python.org/3.3/library/functions.html#zip), here's an approximate implementation of zip function,
+- Z dokumentacji [pythona](https://docs.python.org/3.3/library/functions.html#zip), tak prezentuje się przybliżona implementacja funkcji zip,
     ```py
     def zip(*iterables):
         sentinel = object()
@@ -2047,9 +2047,9 @@ Where did element `3` go from the `numbers` list?
                 result.append(elem)
             yield tuple(result)
     ```
-- So the function takes in arbitrary number of itreable objects, adds each of their items to the `result` list by calling the `next` function on them, and stops whenever any of the iterable is exhausted. 
-- The caveat here is when any iterable is exhausted, the existing elements in the `result` list are discarded. That's what happened with `3` in the `numbers_iter`.
-- The correct way to do the above using `zip` would be,
+- Tak więc funkcja pobiera dowolną liczbę iterowalnych obiektów, dodaje każdy z ich elementów do listy `result` wywołując na nich funkcję `next` i zatrzymuje się, gdy którykolwiek z iterowalnych elementów zostanie wyczerpany.
+- Zastrzeżenie polega na tym, że gdy jakikolwiek element iteracyjny zostanie wyczerpany, istniejące elementy na liście `result` są odrzucane. Tak stało się z `3` w `numbers_iter`.
+- Prawidłowym sposobem wykonania powyższego przy użyciu `zip` byłoby,
     ```py
     >>> numbers = list(range(7))
     >>> numbers_iter = iter(numbers)
@@ -2058,11 +2058,11 @@ Where did element `3` go from the `numbers` list?
     >>> list(zip(remaining, numbers_iter))
     [(3, 3), (4, 4), (5, 5), (6, 6)]
     ```
-    The first argument of zip should be the one with fewest elements.
+    Pierwszym argumentem zip powinien być ten z najmniejszą liczbą elementów.
 
 ---
 
-### ▶ Loop variables leaking out!
+### ▶ Wyciek zmiennych pętli!
 <!-- Example ID: ccec7bf6-7679-4963-907a-1cd8587be9ea --->
 1\.
 ```py
@@ -2072,17 +2072,17 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**Wynik:**
 ```py
 6 : for x inside loop
 6 : x in global
 ```
 
-But `x` was never defined outside the scope of for loop...
+Ale `x` nigdy nie zostało zdefiniowane poza zakresem pętli for...
 
 2\.
 ```py
-# This time let's initialize x first
+# Tym razem najpierw zdefiniujmy x
 x = -1
 for x in range(7):
     if x == 6:
@@ -2090,7 +2090,7 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**Wynik:**
 ```py
 6 : for x inside loop
 6 : x in global
@@ -2098,7 +2098,7 @@ print(x, ': x in global')
 
 3\.
 
-**Output (Python 2.x):**
+**Wynik (Python 2.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2107,7 +2107,7 @@ print(x, ': x in global')
 4
 ```
 
-**Output (Python 3.x):**
+**Wynik (Python 3.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2116,17 +2116,17 @@ print(x, ': x in global')
 1
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- In Python, for-loops use the scope they exist in and leave their defined loop-variable behind. This also applies if we explicitly defined the for-loop variable in the global namespace before. In this case, it will rebind the existing variable.
+- W Pythonie pętle for używają zakresu, w którym istnieją, i pozostawiają za sobą zdefiniowaną zmienną pętli. Dotyczy to również sytuacji, gdy wcześniej jawnie zdefiniowaliśmy zmienną for-loop w globalnej przestrzeni nazw. W takim przypadku ponownie powiąże istniejącą zmienną.
 
-- The differences in the output of Python 2.x and Python 3.x interpreters for list comprehension example can be explained by following change documented in [What’s New In Python 3.0](https://docs.python.org/3/whatsnew/3.0.html) changelog:
+- Różnice w wynikach interpreterów Python 2.x i Python 3.x dla przykładu ze zrozumieniem list można wyjaśnić, postępując zgodnie ze zmianą udokumentowaną w [Co nowego w Pythonie 3.0](https://docs.python.org/3/whatsnew/3.0.html) dziennik zmian:
 
-    > "List comprehensions no longer support the syntactic form `[... for var in item1, item2, ...]`. Use `[... for var in (item1, item2, ...)]` instead. Also, note that list comprehensions have different semantics: they are closer to syntactic sugar for a generator expression inside a `list()` constructor, and in particular, the loop control variables are no longer leaked into the surrounding scope."
+    > "Listy składane nie obsługują już formy składniowej `[... for var in item1, item2, ...]`. Zamiast tego użyj `[... for var in (item1, item2,...)]`. Zauważ też, że listy składane mają inną semantykę: są bliższe specyfice składni dla wyrażenia generatora wewnątrz konstruktora `list()`, a w szczególności zmienne sterujące pętli nie wyciekają już do zewnętrznego zasięgu."
 
 ---
 
-### ▶ Beware of default mutable arguments!
+### ▶ Uważaj na domyślne zmienne argumenty!
 <!-- Example ID: 7d42dade-e20d-4a7b-9ed7-16fb58505fe9 --->
 
 ```py
@@ -2135,7 +2135,7 @@ def some_func(default_arg=[]):
     return default_arg
 ```
 
-**Output:**
+**Wynik:**
 ```py
 >>> some_func()
 ['some_string']
@@ -2147,9 +2147,9 @@ def some_func(default_arg=[]):
 ['some_string', 'some_string', 'some_string']
 ```
 
-#### 💡 Explanation:
+#### 💡 Wyjaśnienie:
 
-- The default mutable arguments of functions in Python aren't really initialized every time you call the function. Instead, the recently assigned value to them is used as the default value. When we explicitly passed `[]` to `some_func` as the argument, the default value of the `default_arg` variable was not used, so the function returned as expected.
+- Domyślne zmienne argumenty funkcji w Pythonie tak naprawdę nie są inicjowane za każdym razem, gdy wywołujesz funkcję. Zamiast tego ostatnio przypisana do nich wartość jest używana jako wartość domyślna. Kiedy jawnie przekazaliśmy `[]` do `some_func` jako argumentu, domyślna wartość zmiennej `default_arg` nie została użyta, więc funkcja zwróciła to co zgodne z oczekiwaniami.
 
     ```py
     def some_func(default_arg=[]):
@@ -2157,9 +2157,9 @@ def some_func(default_arg=[]):
         return default_arg
     ```
 
-    **Output:**
+    **Wynik:**
     ```py
-    >>> some_func.__defaults__ #This will show the default argument values for the function
+    >>> some_func.__defaults__ #Spowoduje to wyświetlenie domyślnych wartości argumentów funkcji
     ([],)
     >>> some_func()
     >>> some_func.__defaults__
@@ -2172,7 +2172,7 @@ def some_func(default_arg=[]):
     (['some_string', 'some_string'],)
     ```
 
-- A common practice to avoid bugs due to mutable arguments is to assign `None` as the default value and later check if any value is passed to the function corresponding to that argument. Example:
+- Powszechną praktyką unikania błędów spowodowanych mutowalnymi argumentami jest przypisanie `None` jako wartości domyślnej, a następnie sprawdzenie, czy jakakolwiek wartość jest przekazywana do funkcji odpowiadającej temu argumentowi. Przykład:
 
     ```py
     def some_func(default_arg=None):
@@ -2184,31 +2184,31 @@ def some_func(default_arg=[]):
 
 ---
 
-### ▶ Catching the Exceptions
+### ▶ Łapanie wyjątków
 <!-- Example ID: b5ca5e6a-47b9-4f69-9375-cda0f8c6755d --->
 ```py
 some_list = [1, 2, 3]
 try:
-    # This should raise an ``IndexError``
+    # To powinno podnieść ``IndexError``
     print(some_list[4])
 except IndexError, ValueError:
     print("Caught!")
 
 try:
-    # This should raise a ``ValueError``
+    # To powinno podnieść ``ValueError``
     some_list.remove(4)
 except IndexError, ValueError:
     print("Caught again!")
 ```
 
-**Output (Python 2.x):**
+**Wynik (Python 2.x):**
 ```py
 Caught!
 
 ValueError: list.remove(x): x not in list
 ```
 
-**Output (Python 3.x):**
+**Wynik (Python 3.x):**
 ```py
   File "<input>", line 3
     except IndexError, ValueError:
@@ -2216,24 +2216,24 @@ ValueError: list.remove(x): x not in list
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-* To add multiple Exceptions to the except clause, you need to pass them as parenthesized tuple as the first argument. The second argument is an optional name, which when supplied will bind the Exception instance that has been raised. Example,
+* Aby dodać wiele wyjątków do wyrażenia except, musisz przekazać je w tuplu jako pierwszy argument. Drugi argument to opcjonalna nazwa, która po dostarczeniu powiąże podniesioną instancję Exception. Przykład,
   ```py
   some_list = [1, 2, 3]
   try:
-     # This should raise a ``ValueError``
+     # To powinno podnieść ``ValueError``
      some_list.remove(4)
   except (IndexError, ValueError), e:
      print("Caught again!")
      print(e)
   ```
-  **Output (Python 2.x):**
+  **Wynik (Python 2.x):**
   ```
   Caught again!
   list.remove(x): x not in list
   ```
-  **Output (Python 3.x):**
+  **Wynik (Python 3.x):**
   ```py
     File "<input>", line 4
       except (IndexError, ValueError), e:
@@ -2241,7 +2241,7 @@ SyntaxError: invalid syntax
   IndentationError: unindent does not match any outer indentation level
   ```
 
-* Separating the exception from the variable with a comma is deprecated and does not work in Python 3; the correct way is to use `as`. Example,
+* Oddzielenie wyjątku od zmiennej przecinkiem jest przestarzałe i nie działa w Pythonie 3; prawidłowym sposobem jest użycie `as`. Przykład,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -2251,7 +2251,7 @@ SyntaxError: invalid syntax
       print("Caught again!")
       print(e)
   ```
-  **Output:**
+  **Wynik:**
   ```
   Caught again!
   list.remove(x): x not in list
