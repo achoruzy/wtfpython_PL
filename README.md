@@ -2184,31 +2184,31 @@ def some_func(default_arg=[]):
 
 ---
 
-### ▶ Catching the Exceptions
+### ▶ Łapanie wyjątków
 <!-- Example ID: b5ca5e6a-47b9-4f69-9375-cda0f8c6755d --->
 ```py
 some_list = [1, 2, 3]
 try:
-    # This should raise an ``IndexError``
+    # To powinno podnieść ``IndexError``
     print(some_list[4])
 except IndexError, ValueError:
     print("Caught!")
 
 try:
-    # This should raise a ``ValueError``
+    # To powinno podnieść ``ValueError``
     some_list.remove(4)
 except IndexError, ValueError:
     print("Caught again!")
 ```
 
-**Output (Python 2.x):**
+**Wynik (Python 2.x):**
 ```py
 Caught!
 
 ValueError: list.remove(x): x not in list
 ```
 
-**Output (Python 3.x):**
+**Wynik (Python 3.x):**
 ```py
   File "<input>", line 3
     except IndexError, ValueError:
@@ -2216,24 +2216,24 @@ ValueError: list.remove(x): x not in list
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation
+#### 💡 Wyjaśnienie
 
-* To add multiple Exceptions to the except clause, you need to pass them as parenthesized tuple as the first argument. The second argument is an optional name, which when supplied will bind the Exception instance that has been raised. Example,
+* Aby dodać wiele wyjątków do wyrażenia except, musisz przekazać je w tuplu jako pierwszy argument. Drugi argument to opcjonalna nazwa, która po dostarczeniu powiąże podniesioną instancję Exception. Przykład,
   ```py
   some_list = [1, 2, 3]
   try:
-     # This should raise a ``ValueError``
+     # To powinno podnieść ``ValueError``
      some_list.remove(4)
   except (IndexError, ValueError), e:
      print("Caught again!")
      print(e)
   ```
-  **Output (Python 2.x):**
+  **Wynik (Python 2.x):**
   ```
   Caught again!
   list.remove(x): x not in list
   ```
-  **Output (Python 3.x):**
+  **Wynik (Python 3.x):**
   ```py
     File "<input>", line 4
       except (IndexError, ValueError), e:
@@ -2241,7 +2241,7 @@ SyntaxError: invalid syntax
   IndentationError: unindent does not match any outer indentation level
   ```
 
-* Separating the exception from the variable with a comma is deprecated and does not work in Python 3; the correct way is to use `as`. Example,
+* Oddzielenie wyjątku od zmiennej przecinkiem jest przestarzałe i nie działa w Pythonie 3; prawidłowym sposobem jest użycie `as`. Przykład,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -2251,7 +2251,7 @@ SyntaxError: invalid syntax
       print("Caught again!")
       print(e)
   ```
-  **Output:**
+  **Wynik:**
   ```
   Caught again!
   list.remove(x): x not in list
